@@ -1,0 +1,68 @@
+<nav class="navbar navbar-light navbar-fixed-top" ng-controller="pageNewController">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-left">
+            <li><a href=" #!/user/{{model.userId}}/website"><span class="glyphicon glyphicon-chevron-left">
+                </span></a></li>
+            <li><a>New Page</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a ng-click="model.createPage(model.page.name,model.page.description)"><span
+                    class="glyphicon glyphicon-ok"></span></a></li>
+        </ul>
+    </div>
+</nav>
+
+<div>
+    <table style="width: 100%">
+        <col width=30%>
+        <col width=70%>
+        <tr>
+            <th valign="top">
+                <div id="side">
+                    <ul style="list-style-type:none">
+                        <li>
+                            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/new">New Page</a>
+                            <a><span class="glyphicon glyphicon-cog pull-right"></span></a></li>
+                        <li ng-repeat="page in model.pages">
+                            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
+                                {{page.name}}</a>
+                            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}"><span
+                                    class="glyphicon glyphicon-cog pull-right"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </th>
+
+
+            <th valign="top">
+                <div id="main">
+                    <form>
+                        <div class="form-group">
+                            <div ng-show="model.error" class="alert alert-danger">
+                                {{model.error}}
+                            </div>
+                            <label for="name">Name</label>
+                            <input ng-model="model.page.name" type="text" class="form-control" id="name"
+                                   placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea ng-model="model.page.description" class="form-control" rows="5" id="description"
+                                      placeholder="Description"></textarea>
+                        </div>
+                    </form>
+                </div>
+
+            </th>
+        </tr>
+    </table>
+</div>
+
+
+<nav class="navbar navbar-light navbar-fixed-bottom bg-faded">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#!/user/{{model.userId}}"><span class="glyphicon glyphicon-user"></span></a></li>
+        </ul>
+    </div>
+</nav>
