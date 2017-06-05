@@ -59,17 +59,17 @@
                 controllerAs: 'model'
             })
             // widget routing
-            .when('/user/:userId/website/:wid/page/:pid/widget', {
+            .when('/user/:uid/website/:wid/page/:pid/widget', {
                 templateUrl: 'views/widget/templates/widget-list.view.client.html',
                 controller: 'widgetListController',
                 controllerAs: 'model'
             })
-            .when('/user/:userId/website/:wid/page/:pid/widget/new', {
+            .when('/user/:uid/website/:wid/page/:pid/widget/new', {
                 templateUrl: 'views/widget/templates/widget-choose.view.client.html',
                 controller: 'widgetChooseController',
                 controllerAs: 'model'
             })
-            .when('/user/:userId/website/:wid/page/:pid/widget/:wgid', {
+            .when('/user/:uid/website/:wid/page/:pid/widget/:wgid', {
                 templateUrl: 'views/widget/templates/widget-edit.view.client.html',
                 controller: 'widgetEditController',
                 controllerAs: 'model'

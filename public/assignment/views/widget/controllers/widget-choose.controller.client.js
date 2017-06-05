@@ -20,6 +20,10 @@
         model.widget = widgetService.findWidgetById(model.widgetId);
         model.createWidget = createWidget;
 
+        function init() {
+            model.widgets = widgetService.findWidgetsByPageId(model.pageId);
+        }
+        init();
 
         //implement
         function createWidget(awidget){
