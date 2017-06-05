@@ -35,12 +35,12 @@
 
             if(websiteName === null || websiteName === '' || typeof websiteName === 'undefined') {
                 model.error = 'Name is required :D';
-                return;
+
             } else {
                 if (typeof websiteDescription === 'undefined'){
                     websiteDescription = '';
                 }
-                var website = {}
+                var website = {};
                 website.name = websiteName;
                 website.description = websiteDescription;
                 website.developerId = model.userId;

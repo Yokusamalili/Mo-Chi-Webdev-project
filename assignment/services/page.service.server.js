@@ -9,36 +9,32 @@
 // deletePage(pageId) - removes the page from local pages array whose _id matches the pageId parameter
 
 
-(function () {
+
+(function() {
     angular
         .module("WebAppMaker")
         .factory("pageService", pageService);
-
     function pageService() {
-        var pages = [
-            { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem"},
-            { "_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem"},
-            { "_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem"},
-            { "_id": "234", "name": "Post testsssss", "websiteId": "789", "description": "Lorem"},
-            { "_id": "admin", "name": "hshhs", "websiteId": "admin", "description": "LA LA LA"}
-            ];
+        var pages = [ { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
+            { "_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem" },
+            { "_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem" },
+            { "_id": "admin", "name": "hshhs", "websiteId": "ddd", "description": "LA LA LA" }];
 
         var api = {
-            "createPage": createPage,
-            "findPageByWebsiteId": findPageByWebsiteId,
-            "findPageById": findPageById,
-            "updatePage": updatePage,
-            "deletePage": deletePage
-        };
+            "createPage"   : createPage,
+            "findPageByWebsiteId" : findPageByWebsiteId,
+            "findPageById"   : findPageById,
+            "updatePage"   : updatePage,
+            "deletePage"   : deletePage
+    };
         return api;
 
-        function createPage(page) {
-            page._id = pages[pages.length - 1]._id + 1 + "";
-            page.created = new Date();
-            page.updated = new Date();
+        function createPage(websiteId, page) {
+            page._id = pages[pages.length-1]._id+1+"";
+            page.websiteId = websiteId;
             pages.push(page);
-        }
 
+        }
         function findPageByWebsiteId(websiteId) {
             var resultSet = [];
             for (var p in pages) {
@@ -48,19 +44,16 @@
             }
             return resultSet;
         }
-
         function findPageById(pageId) {
             return pages.find(function (page) {
                 return page._id === pageId;
             });
         }
-
         function updatePage(pageId, page) {
-            var oldPage = findPageById(pageId);
+            var oldPage = findWebsiteById(pageId);
             page._id = pageId;
             pages[pages.indexOf(oldPage)] = page
         }
-
         function deletePage(pageId) {
             var page = pages.find(function (page) {
                 return page._id === pageId;

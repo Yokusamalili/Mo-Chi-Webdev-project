@@ -20,13 +20,12 @@
         model.widget = widgetService.findWidgetById(model.widgetId);
         model.createWidget = createWidget;
 
+
         //implement
         function createWidget(awidget){
             awidget.pageId = model.pageId;
             widgetService.createWidget(model.pageId,awidget);
-            console.log(awidget);
             $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' +model.pageId+'/widget');
-
         }
     }
 })();

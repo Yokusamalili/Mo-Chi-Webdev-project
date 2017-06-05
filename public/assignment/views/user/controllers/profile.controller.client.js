@@ -29,7 +29,7 @@
                     username: username,
                     password: password,
                     firstName: firstName,
-                    lastName: lastName,
+                    lastName: lastName
                 };
                 userService.updateUser(model.userId,newUser);
                 $location.url('/user/' + newUser._id);

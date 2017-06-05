@@ -24,7 +24,6 @@
             { "_id": "678", "name": "Checkers",    "developerId": "123", "description": "Lorem" },
             { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Lorem" },
             { "_id": "admin","name":"Boston Sports","developerId": "admin", "description": "Boston Sprots' Teams"}
-
         ];
         var api = {
             "createWebsite"   : createWebsite,
@@ -37,17 +36,17 @@
         return api;
         function createWebsite(website) {
             website._id = (new Date()).getTime() + "";
-            website.created = new Date();
-            website.updated = new Date();
+            // website.created = new Date();
+            // website.updated = new Date();
             website.name = website.name;
-            website.description = website.description;
+            // website.description = website.description;
             websites.push(website);
         }
 
         function updateWebsite(websiteId, website) {
             var oldWeb = findWebsiteById(websiteId);
             website._id = websiteId;
-            users[users.indexOf(oldWeb)] = website
+            websites[websites.indexOf(oldWeb)] = website
         }
 
         function deleteWebsite(websiteId) {

@@ -19,19 +19,11 @@
             <a><span class="glyphicon glyphicon-cog pull-right"></span></a></li>
         <li ng-repeat="page in model.pages">
             <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
-                {{page.name}}
-        <li>
-            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page"><span
+                {{page.name}}</a>
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}"><span
                     class="glyphicon glyphicon-cog pull-right"></span></a>
         </li>
-        <li>
-            <a href=href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
-                widget list (not working)
-            </a>
-        </li>
     </ul>
-
-
 </div>
 
 
@@ -42,4 +34,6 @@
         </ul>
     </div>
 </nav>
+
+
 

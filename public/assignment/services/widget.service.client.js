@@ -11,8 +11,9 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .factory("WidgetService", WidgetService);
-    function WidgetService() {
+        .factory("widgetService", widgetService);
+
+    function widgetService() {
         var widgets = [
             {"_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
             {"_id": "234", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
@@ -36,6 +37,7 @@
             "deleteWidget": deleteWidget
         };
         return api;
+
         function createWidget(pageId, widget) {
             widget._id = widgets[widgets.length-1]._id+1+"";
             widget.pageId = pageId;
@@ -61,7 +63,7 @@
         function updateWidget(widgetId, widget) {
             var oldWidget = findWidgetById(widgetId);
             widget._id = widgetId;
-            users[widgets.indexOf(oldWidget)] = widget;
+            widgets[widgets.indexOf(oldWidget)] = widget;
 
         }
 

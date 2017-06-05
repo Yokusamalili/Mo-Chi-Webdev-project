@@ -10,7 +10,6 @@
         model.login = login;
 
         function login(username, password) {
-            // model.message = "kk"
             var found = userService.findUserByCredentials(username, password);
             if(found !== null) {
                 $location.url('/user/' + found._id);

@@ -13,7 +13,7 @@
 
         model.userId = $routeParams['uid'];
         model.websiteId = $routeParams['wid'];
-        mmodel.createPage = createPage;
+        model.createPage = createPage;
 
         function init() {
             model.pages = pageService.findPageByWebsiteId(model.websiteId);
@@ -27,10 +27,10 @@
                 if (typeof pageDescription === 'undefined'){
                     pageDescription = '';
                 }
-                var page = {}
+                var page = {};
                 page.name = pageName;
                 page.websiteId = model.websiteId;
-                page.description = pageDescription
+                page.description = pageDescription;
                 pageService.createPage(page);
                 $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page');
             }

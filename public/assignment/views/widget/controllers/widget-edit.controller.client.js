@@ -17,12 +17,16 @@
         model.pageId = $routeParams['pid'];
         model.widgetId = $routeParams['wgid'];
         model.widget = widgetService.findWidgetById(model.widgetId);
-        model.updateWidget = updateWidget;
+        model.updateWidget = updateWidget
+
+        function init() {
+            model.widgets = widgetService.findWidgetsByPageId(model.pageId);
+        }
+        init();
 
         //implement
-        function updateWidget(awidget){
-            console.log(awidget);
-            widgetService.updateWidget(model.widgetId,awidget);
+        function updateWidget(widget){
+            widgetService.updateWidget(model.widgetId,widget);
             $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' +model.pageId+'/widget');
 
         }
