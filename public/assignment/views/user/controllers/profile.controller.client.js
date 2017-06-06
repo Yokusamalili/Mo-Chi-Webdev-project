@@ -5,38 +5,39 @@
 
     function profileController($location, $routeParams, userService) {
         var model = this;
-        model.userId = $routeParams['uid'];
-        model.user = userService.findUserById(model.userId);
+        var userId = $routeParams['uid'];
+
+        model.userId = userId;
+        // model.user = userService.findUserById(userId);
         model.updateUser = updateUser;
+        model.deleteUser = deleteUser;
 
-        function updateUser(username,password1,password2,firstName,lastName,email){
-            if(username === null || username === '' || typeof username === 'undefined') {
-                model.error = 'Username is required.';
-                return;
-            }
+        function init() {
+           userService
+                .findUserById(userId)
+                .then (function (newuser){
+                    if(newuser != '0') {
+                        model.user = newuser;
+                    }
+                })
+        }
+        init();
 
-            if(password1 !== password2 || password1 === null || typeof password1 === 'undefined') {
-                model.error = "Passwords don't match.";
-                return;
-            }
+        function deleteUser(user) {
+            userService
+                .deleteUser(user._id)
+                .then(function () {
+                    $location.url('/login');
+                });
+            init();
+        }
 
-            var found = userService.findUserByUsername(username);
-
-            if(found !== null && found._id != model.userId) {
-                model.error = "Username unavailable :(";
-            } else {
-                var newUser = {
-                    username: username,
-                    password: password,
-                    firstName: firstName,
-                    lastName: lastName
-                };
-                userService.updateUser(model.userId,newUser);
-                $location.url('/user/' + newUser._id);
-
-            }
-            userEmail = email;
+        function updateUser(user) {
+            userService
+                .updateUser(user._id, user)
+                .then(function () {
+                    model.message = "User updated successfully";
+                });
         }
     }
-
 })();

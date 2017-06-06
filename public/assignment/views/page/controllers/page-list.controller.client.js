@@ -14,7 +14,14 @@
 
 
         function init() {
-            model.pages = pageService.findPageByWebsiteId(model.websiteId);
+            pageService
+                .findAllPagesForWebsite(model.websiteId)
+                .then(suc);
+                function suc (ps) {
+                    if(ps !== '[]') {
+                        model.pages = ps;
+                    }
+                };
         }
         init();
     }

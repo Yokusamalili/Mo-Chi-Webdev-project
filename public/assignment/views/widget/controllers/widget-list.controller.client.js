@@ -16,9 +16,14 @@
         model.trustThisContent = trustThisContent;
         model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
         model.getWidgetUrlForType = getWidgetUrlForType;
+        model.sortWidget = sortWidget;
 
         function init() {
-            model.widgets = widgetService.findWidgetsByPageId(model.pageId);
+            widgetService
+                .findWidgetsForPage(model.pageId)
+                .then(function (response) {
+                    model.widgets = response.data;
+                });
         }
         init();
 
@@ -35,9 +40,15 @@
 
         }
 
-        function trustThisContent(html) {
-            // diligence to scrub any unsafe content
-            return $sce.trustAsHtml(html);
+        function sortWidget(init, final) {
+            widgetService
+                .sortWidget(model.pageId, init, final)
+                .then(function (response) {
+                    model.widgets = response.data;
+                }, function(error) {
+                    model.error = error.data;
+                })
+
         }
     }
 })();

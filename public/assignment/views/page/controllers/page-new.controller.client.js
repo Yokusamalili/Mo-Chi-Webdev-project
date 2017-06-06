@@ -15,26 +15,17 @@
         model.websiteId = $routeParams['wid'];
         model.createPage = createPage;
 
-        function init() {
-            model.pages = pageService.findPageByWebsiteId(model.websiteId);
-        }
-        init();
 
-        function createPage(pageName,pageDescription) {
-            if(pageName === null || pageName === '' || typeof pageName === 'undefined') {
-                model.error = 'Name is required :D';
-            } else {
-                if (typeof pageDescription === 'undefined'){
-                    pageDescription = '';
-                }
-                var page = {};
-                page.name = pageName;
-                page.websiteId = model.websiteId;
-                page.description = pageDescription;
-                pageService.createPage(page);
-                $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page');
-            }
 
+        function createPage(page) {
+            page.websiteId = parseInt(model.websiteId);
+            pageService
+                .createPage(page)
+                .then(suc);
+                function suc(page) {
+                    $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
+
+                };
         }
     }
 })();

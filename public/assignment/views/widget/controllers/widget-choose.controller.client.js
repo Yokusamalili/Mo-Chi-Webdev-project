@@ -21,15 +21,37 @@
         model.createWidget = createWidget;
 
         function init() {
-            model.widgets = widgetService.findWidgetsByPageId(model.pageId);
+            widgetService
+                .findWidgetbyId(model.wigetId)
+                .success(function (wiget) {
+                    if (wiget != '0') {
+                        model.widget = wiget;
+                    }
+                })
+                .error(function () {
+
+                });
+            ;
         }
+
         init();
 
         //implement
-        function createWidget(awidget){
-            awidget.pageId = model.pageId;
-            widgetService.createWidget(model.pageId,awidget);
-            $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' +model.pageId+'/widget');
+        function createWidget(pid, widget) {
+            widget._id = (new Date()).getTime();
+            widget.pageId = pid;
+            if (widget.widgetType == 'HEADER' && widget.size == null) {
+                widget.size = 2;
+            }
+            widgetService
+                .createWidget(widget)
+                .success(function () {
+                    $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget/" + widget._id);
+
+                })
+                .error(function () {
+
+                })
         }
     }
 })();

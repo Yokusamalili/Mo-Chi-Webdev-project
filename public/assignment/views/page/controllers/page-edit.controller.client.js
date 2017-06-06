@@ -17,33 +17,33 @@
         model.pageId = $routeParams['wid'];
         model.pageId = $routeParams['pid'];
         model.updatePage = updatePage;
+        model.deletePage =deletePage;
 
         function init() {
-            model.pages = pageService.findPageByWebsiteId(model.userId);
+            pageService
+                .findPageById(model.pageId)
+                .success(function (pg) {
+                    if(pg != '0') {
+                        model.page = pg;
+                    }
+                })
+                .error(function () {
+
+                });
         }
+
         init();
 
         // implementation
-        function updatePage(pageName, pageDescription){
-
-            if(pageName === null || pageName === '' || typeof pageName === 'undefined') {
-                model.error = 'Name is required :D';
-            } else {
-                if (typeof pageDescription === 'undefined'){
-                    pageDescription = '';
-                }
-                var page = {};
-                page.name = pageName;
-                page.websiteId = model.websiteId;
-                page.description = pageDescription;
-                pageService.updatePage(model.pageId,page);
-                $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page');
-            }
+        function updatePage(currentpage) {
+            pageService
+                .updatePage(currentpage);
+            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
         }
-        
+
         function deletePage(pageId) {
             pageService.deletePage(pageId);
-            $location.url('/user/'+model.userId+'/website'+model.websiteId+'/page'+model.pageId);
+            $location.url('/user/' + model.userId + '/website' + model.websiteId + '/page' + model.pageId);
         }
     }
 })();

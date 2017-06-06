@@ -2,64 +2,76 @@
  * Created by moira on 5/28/17.
  */
 
-// createPage(websiteId, page) - adds the page parameter instance to the local pages array. The new page's websiteId is set to the websiteId parameter
-// findPageByWebsiteId(websiteId) - retrieves the pages in local pages array whose websiteId matches the parameter websiteId
-// findPageById(pageId) - retrieves the page in local pages array whose _id matches the pageId parameter
-// updatePage(pageId, page) - updates the page in local pages array whose _id matches the pageId parameter
-// deletePage(pageId) - removes the page from local pages array whose _id matches the pageId parameter
+module.exports = function (app) {
+
+    var pages = [{"_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem"},
+        {"_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem"},
+        {"_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem"},
+        {"_id": "admin", "name": "hshhs", "websiteId": "ddd", "description": "LA LA LA"}];
 
 
+    app.post('/api/website/:websiteId/page', createPage);
+    app.get('/api/website/:websiteId/page', findAllPagesForWebsite);
+    app.get('/api/page/:pageId', findPageById);
+    app.put('/api/page/:pageId', updatePage);
+    app.delete('/api/page/:pageId', deletePage);
 
-(function() {
-    angular
-        .module("WebAppMaker")
-        .factory("pageService", pageService);
-    function pageService() {
-        var pages = [ { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
-            { "_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem" },
-            { "_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem" },
-            { "_id": "admin", "name": "hshhs", "websiteId": "ddd", "description": "LA LA LA" }];
 
-        var api = {
-            "createPage"   : createPage,
-            "findPageByWebsiteId" : findPageByWebsiteId,
-            "findPageById"   : findPageById,
-            "updatePage"   : updatePage,
-            "deletePage"   : deletePage
-    };
-        return api;
-
-        function createPage(websiteId, page) {
-            page._id = pages[pages.length-1]._id+1+"";
-            page.websiteId = websiteId;
-            pages.push(page);
-
-        }
-        function findPageByWebsiteId(websiteId) {
-            var resultSet = [];
-            for (var p in pages) {
-                if (pages[p].websiteId === websiteId) {
-                    resultSet.push(pages[p]);
-                }
-            }
-            return resultSet;
-        }
-        function findPageById(pageId) {
-            return pages.find(function (page) {
-                return page._id === pageId;
-            });
-        }
-        function updatePage(pageId, page) {
-            var oldPage = findWebsiteById(pageId);
-            page._id = pageId;
-            pages[pages.indexOf(oldPage)] = page
-        }
-        function deletePage(pageId) {
-            var page = pages.find(function (page) {
-                return page._id === pageId;
-            });
-            var index = pages.indexOf(page);
-            pages.splice(index, 1);
-        }
+    function createPage(req, res) {
+        console.log("***************create success!");
+        var page = req.body;
+        page._id = (new Date()).getTime();
+        pages.push(page);
+        res.send(page);
     }
-})();
+
+    function findAllPagesForWebsite(req, res) {
+        console.log("**************find ALL Pages For Website");
+        var wid = req.params.websiteId;
+        console.log(wid);
+        var result = [];
+        for(var p in pages) {
+            if(pages[p].websiteId === parseInt(wid)) {
+                result.push(pages[p]);
+            }
+        }
+        res.send(result);
+    }
+
+    function findPageById(req,res) {
+        console.log("**************find Page By ID");
+        var pid = parseInt(req.params.pageId);
+        console.log(pid);
+        for (var p in pages) {
+            if (pages[p]._id === pid) {
+                res.send(pages[p]);
+                return;
+            }
+        }
+        res.sendStatus(404);
+    }
+
+    function updatePage(req, res) {
+        console.log("***********update Page");
+        var updatedpage = req.body;
+        console.log(updatedpage);
+        var pid = parseInt(req.params.pageId);
+        for(var p in pages) {
+            if(pages[p]._id == pid) {
+                pages[p] = updatedpage;
+            }
+        }
+        res.sendStatus(200);
+    }
+
+    function deletePage(req, res) {
+        console.log("*************Delete");
+        var pid = parseInt(req.params.pageId);
+        for(var p in pages) {
+            if(pages[p]._id == pid) {
+                pages.splice(p,1);
+            }
+        }
+        res.sendStatus(200);
+    }
+}

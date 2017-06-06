@@ -9,7 +9,17 @@
         model.userId = $routeParams['uid'];
 
         function init() {
-            model.websites = websiteService.findWebsitesByUser(model.userId);
+            websiteService
+                .findAllWebsitesForUser(model.userId)
+                .then(success, errorHandle);
+                function success (webs) {
+                    if(webs !== '[]') {
+                        model.websites = webs;
+                    }
+                }
+                function errorHandle() {
+                    model.message="Name is required :D"
+                }
         }
         init();
     }

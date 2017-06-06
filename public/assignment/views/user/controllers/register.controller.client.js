@@ -20,16 +20,19 @@
 
             var found = userService.findUserByUsername(username);
 
-            if(found !== null) {
-                model.error = "Username is unavailable";
-            } else {
+            if(found == null) {
                 var user = {
                     username: username,
                     password: password1
                 };
+            } else {
+                model.error = "Username is unavailable";
                 // model.message = user;
-                userService.createUser(user);
-                $location.url('/user/' + user._id);
+                userService
+                    .createUser(user)
+                    .then(function (user) {
+                        $location.url('/user/' + user._id);
+                    });
             }
         }
     }
