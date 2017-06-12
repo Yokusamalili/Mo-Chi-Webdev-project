@@ -12,7 +12,7 @@
         vm.createUser = createUser;
 
         function createUser(user) {
-            if(user.password != user.password2 || !user.password || !user.password2) {
+            if(user.password !== user.password2 || !user.password || !user.password2) {
                 vm.error = "Your passwords don't match";
                 return;
             }
@@ -20,7 +20,7 @@
             var promise = UserService.findUserByUsername(user.username);
             promise
                 .success(function(newuser){
-                    if(newuser != '0') {
+                    if(newuser !== '0') {
                         vm.error = "Username exits, please change another one";
                     }
                     else {

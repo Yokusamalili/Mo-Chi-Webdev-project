@@ -206,7 +206,7 @@ function $RouteProvider() {
     * Normalizes the given path, returning a regular expression
     * and the original path.
     *
-    * Inspired by pathRexp in visionmedia/express/lib/utils.js.
+    * Inspired by pathRexp in visionmedia/express/lib/utils.vendor.
     */
   function pathRegExp(path, opts) {
     var insensitive = opts.caseInsensitiveMatch,
@@ -540,7 +540,7 @@ function $RouteProvider() {
      * Check if the route matches the current url.
      *
      * Inspired by match in
-     * visionmedia/express/lib/router/router.js.
+     * visionmedia/express/lib/router/router.vendor.
      */
     function switchRouteMatcher(on, route) {
       var keys = route.keys,
@@ -717,7 +717,7 @@ ngRouteModule.provider('$routeParams', $RouteParamsProvider);
  * Instead you can use `$route.current.params` to access the new route's parameters.
  *
  * @example
- * ```js
+ * ```vendor
  *  // Given:
  *  // URL: http://server.com/index.html#/Chapter/1/Section/2?search=moby
  *  // Route: /Chapter/:chapterId/Section/:sectionId

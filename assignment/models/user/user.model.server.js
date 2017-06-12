@@ -19,12 +19,12 @@ module.exports = function() {
 
 
     function findUserByUsername(username) {
-        console.log("--------------------findUserByUsername-----------------------------")
+        // console.log("--------------------findUserByUsername-----------------------------")
         return UserModel.findOne({username: username});
     }
 
     function removeUser(userId) {
-        console.log("--------------------removeUser-----------------------------")
+        // console.log("--------------------removeUser-----------------------------")
         return UserModel
             .remove({_id: userId});
     }

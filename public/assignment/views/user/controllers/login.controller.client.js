@@ -16,7 +16,7 @@
                .success(function (user) {
                     if(user === '0')
                     {
-                        vm.error = "No such user";
+                        vm.error = "User Not Found";
                     }
                     else {
                         $location.url("/user/" + user._id);

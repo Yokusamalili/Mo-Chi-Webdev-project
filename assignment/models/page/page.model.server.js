@@ -16,7 +16,7 @@ module.exports = function() {
     return api;
 
     function deletePage(pageId) {
-        console.log("----------------deletePage---------------------")
+        // console.log("----------------deletePage---------------------")
         return PageModel
             .remove({
                 _id: pageId
@@ -24,7 +24,7 @@ module.exports = function() {
     }
 
     function updatePage(pageId, page) {
-        console.log("----------------updatePage---------------------")
+        // console.log("----------------updatePage---------------------")
         return PageModel
             .update(
                 {
@@ -39,14 +39,14 @@ module.exports = function() {
     }
 
     function findPageById(pageId) {
-        console.log("----------------findPageById---------------------")
+        // console.log("----------------findPageById---------------------")
         return PageModel
             .findById(pageId);
     }
 
 
     function findAllPagesForWebsite(websiteId){
-        console.log("----------------findAllPagesForWebsite---------------------")
+        // console.log("----------------findAllPagesForWebsite---------------------")
         return PageModel
             .find({
                 _website: websiteId
@@ -54,7 +54,7 @@ module.exports = function() {
     }
 
     function createPage(websiteId, page){
-        console.log("----------------createPage---------------------")
+        // console.log("----------------createPage---------------------")
         page["_website"] = websiteId;
         return PageModel.create(page);
     }

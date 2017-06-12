@@ -15,7 +15,7 @@ module.exports = function (app, model) {
 
     //testing purpose
     function allUsers(req, res) {
-        console.log("------------------getAllUsers----------------------------")
+        // console.log("------------------getAllUsers----------------------------")
         return model
             .userModel
             .getAllUser()

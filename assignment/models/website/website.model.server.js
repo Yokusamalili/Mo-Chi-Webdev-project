@@ -17,7 +17,7 @@ module.exports = function() {
 
 
     function updateWebsite(websiteId,website) {
-        console.log("----------------updateWebsite------------------")
+        // console.log("----------------updateWebsite------------------")
         return WebsiteModel
             .update(
                 {
@@ -31,13 +31,13 @@ module.exports = function() {
     }
 
     function findWebsiteById(websiteId) {
-        console.log("----------------FindWebsiteById------------------")
+        // console.log("----------------FindWebsiteById------------------")
         return WebsiteModel
             .findById(websiteId);
     }
 
     function deleteWebsite(websiteId) {
-        console.log("----------------deleteWebsite------------------")
+        // console.log("----------------deleteWebsite------------------")
         return WebsiteModel
             .remove({
                 _id:websiteId
@@ -45,7 +45,7 @@ module.exports = function() {
     };
 
     function findWebsitesForUser(userId) {
-        console.log("----------------findWebsitesForUser------------------")
+        // console.log("----------------findWebsitesForUser------------------")
         return WebsiteModel
             .find({
                 _user: userId
@@ -53,7 +53,7 @@ module.exports = function() {
     }
 
     function createWebsiteForUser(userId,website) {
-        console.log("----------------createWebsiteForUser------------------")
+        // console.log("----------------createWebsiteForUser------------------")
         website["_user"] = userId;
         return WebsiteModel.create(website);
     }

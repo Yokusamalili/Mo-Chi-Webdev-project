@@ -22,7 +22,7 @@ module.exports = function() {
 
 
     function selectFlicker(widgetId, photo){
-        console.log("--------------------selectFlicker--------------------------");
+        // console.log("--------------------selectFlicker--------------------------");
         return WidgetModel
             .update(
                 {
@@ -41,7 +41,7 @@ module.exports = function() {
 
 
     function uploadImage(widgetId, filename) {
-        console.log("--------------------uploadImage--------------------------");
+        // console.log("--------------------uploadImage--------------------------");
         return WidgetModel
                 .update(
                     {
@@ -56,7 +56,7 @@ module.exports = function() {
 
 
     function updateOrderWhenDel(pageId, priority){
-        console.log("--------------------updateOrderWhenDel--------------------------");
+        // console.log("--------------------updateOrderWhenDel--------------------------");
         return WidgetModel
             .find({
                     _page: pageId
@@ -73,7 +73,7 @@ module.exports = function() {
 
 
     function deleteWidget(widgetId){
-        console.log("--------------------deleteWidget--------------------------");
+        // console.log("--------------------deleteWidget--------------------------");
         return WidgetModel
             .remove({
                 _id: widgetId
@@ -81,14 +81,14 @@ module.exports = function() {
     }
 
     function findWidgetById(widgetId){
-        console.log("--------------------findWidgetById--------------------------");
+        // console.log("--------------------findWidgetById--------------------------");
         return WidgetModel
             .findById(widgetId);
     }
 
 
     function createWidget(pageId, widget){
-        console.log("---------------------createWidget-------------------------")
+        // console.log("---------------------createWidget-------------------------")
         widget["_page"] = pageId;
         widget["isType"] = false;
         return WidgetModel.create(widget);
@@ -97,7 +97,7 @@ module.exports = function() {
 
 
     function findAllWidgetsForPage(pageId) {
-    console.log("---------------------findAllWidgetsForPage-------------------------")
+    // console.log("---------------------findAllWidgetsForPage-------------------------")
         return WidgetModel
             .find({
                 _page: pageId
@@ -110,7 +110,7 @@ module.exports = function() {
 
 
     function updateWidget(widgetId, widget){
-        console.log("---------------------updateWidget-------------------------")
+        // console.log("---------------------updateWidget-------------------------")
         switch(widget.widgetType) {
             case "HEADER": return WidgetModel
                 .update(
