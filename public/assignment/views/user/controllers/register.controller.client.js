@@ -1,39 +1,42 @@
+/**
+ * Created by moira on 5/28/17.
+ */
+
 (function () {
     angular
-        .module('WebAppMaker')
-        .controller('registerController', registerController);
-    
-    function registerController($location, userService) {
+        .module("WebAppMaker")
+        .controller("RegisterController", RegisterController);
 
-        var model = this;
+    function RegisterController($location, UserService) {
+        var vm = this;
+        vm.createUser = createUser;
 
-        // event handlers
-        model.register = register;
-
-        // implementation
-        function register(username, password1, password2) {
-
-            if(password1 !== password2) {
-                model.error = "Passwords don't match";
+        function createUser(user) {
+            if(user.password != user.password2 || !user.password || !user.password2) {
+                vm.error = "Your passwords don't match";
                 return;
             }
 
-            var found = userService.findUserByUsername(username);
+            var promise = UserService.findUserByUsername(user.username);
+            promise
+                .success(function(newuser){
+                    if(newuser != '0') {
+                        vm.error = "Username exits, please change another one";
+                    }
+                    else {
+                    UserService
+                        .createUser(user)
+                        .success(function (user) {
+                            $location.url("/user/" + user._id);
 
-            if(found == null) {
-                var user = {
-                    username: username,
-                    password: password1
-                };
-            } else {
-                model.error = "Username is unavailable";
-                // model.message = user;
-                userService
-                    .createUser(user)
-                    .then(function (user) {
-                        $location.url('/user/' + user._id);
-                    });
-            }
+                        })
+                        .error(function () {
+
+                        })
+                    }
+                });
+
+
         }
     }
 })();

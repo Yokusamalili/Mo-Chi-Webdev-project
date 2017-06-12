@@ -1,25 +1,24 @@
-(function () {
+(function(){
     angular
-        .module('WebAppMaker')
-        .controller('websiteListController', websiteListController);
-    
-    function websiteListController($routeParams, websiteService) {
+        .module("WebAppMaker")
+        .controller("WebsiteListController", WebsiteListController);
 
-        var model = this;
-        model.userId = $routeParams['uid'];
+    function WebsiteListController($routeParams, WebsiteService) {
+        var vm = this;
+
+        vm.userId = $routeParams.uid;
+
 
         function init() {
-            websiteService
-                .findAllWebsitesForUser(model.userId)
-                .then(success, errorHandle);
-                function success (webs) {
-                    if(webs !== '[]') {
-                        model.websites = webs;
+            WebsiteService.findWebsitesForUser(vm.userId)
+                .success(function (webs) {
+                    if(webs != '[]') {
+                        vm.websites = webs;
                     }
-                }
-                function errorHandle() {
-                    model.message="Name is required :D"
-                }
+                })
+                .error(function () {
+                });
+
         }
         init();
     }

@@ -1,43 +1,55 @@
+/**
+ * Created by moira on 5/28/17.
+ */
 (function () {
     angular
-        .module('WebAppMaker')
-        .controller('profileController', profileController);
+        .module("WebAppMaker")
+        .controller("ProfileController", ProfileController);
+    function ProfileController($routeParams, UserService) {
+        var vm = this;
+        var userId = $routeParams.uid;
+        vm.updateUser = updateUser;
+        vm.deleteUser = deleteUser;
 
-    function profileController($location, $routeParams, userService) {
-        var model = this;
-        var userId = $routeParams['uid'];
-
-        model.userId = userId;
-        // model.user = userService.findUserById(userId);
-        model.updateUser = updateUser;
-        model.deleteUser = deleteUser;
 
         function init() {
-           userService
-                .findUserById(userId)
-                .then (function (newuser){
-                    if(newuser != '0') {
-                        model.user = newuser;
+            UserService.findUserById(userId)
+                .then(function (response) {
+                    console.log(response);
+                    console.log(response.data);
+                    vm.user=response.data;
+                })
+
+            //return all users for the database page
+            UserService.allUsers()
+                .success(function (newusers) {
+                    if(newusers != '[]') {
+                        vm.users = newusers;
                     }
                 })
+                .error(function () {
+
+                });
+
+
         }
         init();
 
-        function deleteUser(user) {
-            userService
-                .deleteUser(user._id)
-                .then(function () {
-                    $location.url('/login');
-                });
+
+
+
+        function deleteUser(currentUserId) {
+            console.log(currentUserId);
+            UserService.deleteUser(currentUserId);
             init();
         }
 
-        function updateUser(user) {
-            userService
-                .updateUser(user._id, user)
-                .then(function () {
-                    model.message = "User updated successfully";
-                });
+
+        function updateUser() {
+            UserService.updateUser(vm.user);
+
         }
+
+
     }
 })();

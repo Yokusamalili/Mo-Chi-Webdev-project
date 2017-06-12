@@ -1,63 +1,54 @@
 (function () {
     angular
-        .module('WebAppMaker')
-        .controller('websiteEditController', websiteEditController);
+        .module("WebAppMaker")
+        .controller("WebsiteEditController", WebsiteEditController);
 
-    function websiteEditController($routeParams,
-                                   websiteService,
-                                   $location) {
-
-        var model = this;
-        var websiteId = $routeParams.websiteId;
-
-        model.userId = $routeParams['uid'];
-        model.websiteId = $routeParams.websiteId;
-        model.website = websiteService.findWebsiteById(model.websiteId);
-
-        // event handlers
-        model.updateWebsite = updateWebsite;
-        model.deleteWebsite = deleteWebsite;
-
+    function WebsiteEditController($routeParams, WebsiteService,$location) {
+        var vm = this;
+        var websiteId = $routeParams.wid;
+        vm.userId = $routeParams.uid;
+        vm.updateWebsite = updateWebsite;
+        vm.removeWebsite = removeWebsite;
         function init() {
-            websiteService
-                .findWebsiteById(websiteId)
-                .then(sucById, errorHandle1);
 
-            function sucById(newwebsite) {
-                if (newwebsite !== '0') {
-                    model.website = newwebsite;
-                }
-            }
-            function errorHandle1() {
-                model.message = "Name is required :D"
-            }
-
-            websiteService
-                .findAllWebsitesForUser(model.userId)
-                .then(sucForUser,errHandle);
-
-                function sucForUser (webs) {
-                    if (webs != '[]') {
-                        model.websites = webs;
+            var promise = WebsiteService.findWebsiteById(websiteId);
+            promise
+                .success(function (newwebsite) {
+                    if(newwebsite != '0') {
+                        vm.website = newwebsite;
                     }
-                }
-                function errHandle () {
-                    model.message = "Name is required :D"
-                }
-        }
+                })
+                .error(function () {
 
+                });
+
+            WebsiteService.findWebsitesForUser(vm.userId)
+                .success(function (webs) {
+                    if(webs != '[]') {
+                        vm.websites = webs;
+                    }
+                })
+                .error(function () {
+                });
+        }
         init();
 
-        // implementation
+
+
+
+
         function updateWebsite() {
-            websiteService.updateWebsite(model.website);
-            $location.url("/user/" + model.userId + "/website");
+            WebsiteService.updateWebsite(vm.website);
+            $location.url("/user/"+ vm.userId +"/website");
 
         }
 
-        function deleteWebsite(websiteId) {
-            websiteService.removeWebsite(websiteId);
-            $location.url("/user/" + model.userId + "/website");
+
+        function removeWebsite(currentWebId) {
+            WebsiteService.removeWebsite(currentWebId);
+            $location.url("/user/"+ vm.userId +"/website");
         }
+
+        
     }
 })();

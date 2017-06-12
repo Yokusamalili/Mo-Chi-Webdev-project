@@ -1,60 +1,58 @@
+/**
+ * Created by moira on 5/28/17.
+ */
 (function () {
     angular
-        .module('WebAppMaker')
-        .controller('websiteNewController', websiteNewController);
+        .module("WebAppMaker")
+        .controller("WebsiteNewController", WebsiteNewController);
 
-    function websiteNewController($routeParams,
-                                  websiteService,
-                                  $location) {
+    function WebsiteNewController($routeParams, WebsiteService, $location) {
+        var vm = this;
+        //why wid
+        var websiteId = parseInt($routeParams.wid);
+        vm.userId = $routeParams.uid;
 
-        var model = this;
-        var websiteId = $routeParams.websiteId;
-        model.userId = $routeParams['uid'];
+        vm.createWebsite = createWebsite;
 
-
-        // event handlers
-        model.createWebsite = createWebsite;
 
         function init() {
-            websiteService
-                .findWebsiteById(websiteId)
-                .then(success1);
 
-            function success1(newwebsite) {
-                if (newwebsite !== '0') {
-                    model.website = newwebsite;
-                }
-            }
+            var promise = WebsiteService.findWebsiteById(websiteId);
+            promise
+                .success(function (newwebsite) {
+                    if(newwebsite != '0') {
+                        vm.website = newwebsite;
+                    }
+                })
+                .error(function () {
 
-            websiteService
-                .findAllWebsitesForUser(model.userId)
-                .then(success);
+                });
 
 
-            function success(webs) {
-                if (webs !== '[]') {
-                    model.websites = webs;
-                }
-            }
+            WebsiteService.findWebsitesForUser(vm.userId)
+                .success(function (webs) {
+                    console.log(webs);
+                    if(webs != '[]') {
+                        vm.websites = webs;
+                    }
+                })
+                .error(function () {
+                });
         }
-
         init();
 
-
-        // implementation
         function createWebsite(website) {
-            // website.developerId = model.userId;
-            websiteService
-                .createWebsite(website)
-                .then(sucCreate, errHandle);
+            website.uid = vm.userId;
+            WebsiteService
+            .createWebsite(website)
+                .success(function (website) {
+                    $location.url("/user/"+ vm.userId +"/website");
 
-            function sucCreate(website) {
-                $location.url("/user/" + model.userId + "/website");
-            }
+                })
+                .error(function () {
 
-            function errHandle() {
-                model.message = "Name is required :D"
-            }
+                })
         }
+
     }
 })();

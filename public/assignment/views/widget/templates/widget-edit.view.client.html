@@ -1,42 +1,15 @@
-<nav class="navbar navbar-light navbar-fixed-top" ng-controller="widgetEditController">
-    <div class="container-fluid">
-        <ul class="nav navbar-nav navbar-left">
-            <li><a href=" #!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
-                </span></a></li>
-            <li><a>Edit Widget</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a ng-click="model.updateWidget(model.widget)"><span
-                    class="glyphicon glyphicon-ok"></span></a></li>
-        </ul>
-    </div>
-</nav>
 
-
-
-<div class="container-fluid">
-    <div ng-switch="model.widget.widgetType">
-        <div ng-switch-when="HEADING">
-            <div ng-include src="'views/widget/templates/widget-heading-edit.view.client.html'"></div>
-        </div>
-
-        <div ng-switch-when="IMAGE">
-            <div ng-include src="'views/widget/templates/widget-image-edit.view.client.html'"></div>
-        </div>
-        <div ng-switch-when="YOUTUBE">
-            <div ng-include src="'views/widget/templates/widget-youtube-edit.view.client.html'"></div>
-        </div>
-        <div ng-switch-when="HTML">
-            <div ng-include src="'views/widget/templates/widget-heading-edit.view.client.html'"></div>
-        </div>
-    </div>
+<div ng-if ="model.wigtype">
+<div ng-include="'views/widget/editors/widget-'+ model.wigtype +'-editor.html'"></div>
 </div>
 
-
-<nav class="navbar navbar-light navbar-fixed-bottom bg-faded">
+<footer class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#!/user/{{model.userId}}"><span class="glyphicon glyphicon-user"></span></a></li>
-        </ul>
+        <div class="navbar-text pull-right">
+            <a class="navbar-link" href="#/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
     </div>
-</nav>
+</footer>
+

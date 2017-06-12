@@ -1,28 +1,29 @@
 /**
  * Created by moira on 5/28/17.
  */
+
 (function () {
     angular
-        .module('WebAppMaker')
-        .controller('pageListController', pageListController);
+        .module("WebAppMaker")
+        .controller("PageListController", PageListController);
 
-    function pageListController($routeParams, pageService,$location) {
+    function PageListController($routeParams, PageService) {
+        var vm = this;
 
-        var model = this;
-        model.userId = $routeParams['uid'];
-        model.websiteId = $routeParams['wid'];
+        vm.userId = $routeParams.uid;
+        vm.websiteId = $routeParams.wid;
 
-
-        function init() {
-            pageService
-                .findAllPagesForWebsite(model.websiteId)
-                .then(suc);
-                function suc (ps) {
-                    if(ps !== '[]') {
-                        model.pages = ps;
+        function  init() {
+            PageService.findAllPagesForWebsite(vm.websiteId)
+                .success(function (ps) {
+                    if(ps != '[]') {
+                        vm.pages = ps;
                     }
-                };
+                })
+                .error(function () {
+                });
         }
         init();
     }
 })();
+

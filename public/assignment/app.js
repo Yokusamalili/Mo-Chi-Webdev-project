@@ -1,5 +1,4 @@
-/**
- * Created by moira on 5/26/17.
- */
-
-var app = angular.module("WebAppMaker", ['ngRoute']);
+(function (){ // IIFE
+    angular
+        .module("WebAppMaker", ["ngRoute", "wamDirective", "textAngular"]);
+})();

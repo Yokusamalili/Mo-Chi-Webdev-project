@@ -1,31 +1,35 @@
 /**
  * Created by moira on 5/28/17.
  */
+
+
 (function () {
     angular
-        .module('WebAppMaker')
-        .controller('pageNewController', pageNewController);
+        .module("WebAppMaker")
+        .controller("PageNewController", PageNewController);
 
-    function pageNewController($routeParams,
-                                  $location,
-                                  pageService) {
-        var model = this;
+    function PageNewController($routeParams, PageService, $location) {
+        var vm = this;
 
-        model.userId = $routeParams['uid'];
-        model.websiteId = $routeParams['wid'];
-        model.createPage = createPage;
-
+        vm.websiteId = $routeParams.wid;
+        vm.userId = $routeParams.uid;
+        vm.userId = $routeParams.uid;
+        vm.createPage = createPage;
 
 
         function createPage(page) {
-            page.websiteId = parseInt(model.websiteId);
-            pageService
+            page.websiteId = vm.websiteId;
+            PageService
                 .createPage(page)
-                .then(suc);
-                function suc(page) {
-                    $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
+                .success(function (page) {
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
 
-                };
+                })
+                .error(function () {
+
+                })
+
         }
     }
 })();
+

@@ -2,52 +2,50 @@
  * Created by moira on 5/28/17.
  */
 
-
 (function () {
     angular
-        .module('WebAppMaker')
-        .controller('pageEditController', pageEditController);
+        .module("WebAppMaker")
+        .controller("PageEditController", PageEditController);
 
-    function pageEditController($routeParams,
-                                $location,
-                                pageService) {
-        var model = this;
-
-        model.userId = $routeParams['uid'];
-        model.pageId = $routeParams['wid'];
-        model.pageId = $routeParams['pid'];
-        model.updatePage = updatePage;
-        model.deletePage =deletePage;
+    function PageEditController($routeParams, PageService, $location) {
+        var vm = this;
+        vm.userId = $routeParams.uid;
+        vm.pageId = $routeParams.pid;
+        vm.websiteId = $routeParams.wid;
+        vm.updatePage = updatePage;
+        vm.deletePage =deletePage;
 
         function init() {
-            pageService
-                .findPageById(model.pageId)
+            var promise = PageService.findPageById(vm.pageId);
+            promise
                 .success(function (pg) {
                     if(pg != '0') {
-                        model.page = pg;
+                        vm.page = pg;
                     }
                 })
                 .error(function () {
 
                 });
         }
+        return init();
+        //svm.pages = PageService.findPageByWebsiteId(vm.websiteId);
 
-        init();
 
-        // implementation
+
+        function deletePage(pid) {
+            PageService.deletePage(pid);
+            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+        }
+
+
         function updatePage(currentpage) {
-            pageService
-                .updatePage(currentpage);
-            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
+            PageService.updatePage(currentpage);
+            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
         }
 
-        function deletePage(pageId) {
-            pageService.deletePage(pageId);
-            $location.url('/user/' + model.userId + '/website' + model.websiteId + '/page' + model.pageId);
-        }
+
+
+
     }
 })();
-
-
-
 

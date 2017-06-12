@@ -1,32 +1,32 @@
+/**
+ * Created by moira on 5/28/17.
+ */
 (function () {
     angular
         .module("WebAppMaker")
-        .controller("loginController", loginController);
+        .controller("LoginController", LoginController);
+    
+    function LoginController($location, UserService) {
+        var vm = this;
+        vm.login = login;
 
-    function loginController($location, userService) {
-        var model = this;
-        model.login = login;
+        function login (username,password) {
+           UserService
+               .findUserByCredentials(username, password)
+               .success(function (user) {
+                    if(user === '0')
+                    {
+                        vm.error = "No such user";
+                    }
+                    else {
+                        $location.url("/user/" + user._id);
+                    }
+                })
+                .error(function (user) {
+                    console.log("error from login");
+                });
 
-        function login(username, password) {
 
-            // var user = userService.findUserByCredentials(username, password);
-            userService
-                .findUserByCredentials(username, password)
-                .then(login, handleError);
-
-            function handleError(error) {
-                model.message = "Username " + username + " not found, please try again";
-            }
-
-            function login(user) {
-                if (user !== null) {
-                    model.message = "Welcome " + username;
-                    $location.url('/user/' + user._id);
-                } else {
-                    model.message = "Username " + username + " not found, please try again";
-                }
-            }
         }
     }
 })();
-
