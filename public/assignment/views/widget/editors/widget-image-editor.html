@@ -6,7 +6,8 @@
             </a>
         </p>
         <p class="navbar-text pull-left">
-            <a class="navbar-link" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+            <a class="navbar-link"
+               href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </p>
@@ -29,15 +30,16 @@
     </form>
 
     <form action="/api/upload" method="post" enctype="multipart/form-data">
-        <input  name="myFile"   type="file" class="form-control"/>
-        <input  name="widgetId" value="{{model.widget._id}}" style="display: none"/>
-        <input  name="userId"   value="{{model.userId}}" style="display: none"/>
-        <input  name="websiteId"   value="{{model.websiteId}}" style="display: none"/>
-        <input  name="pageId"   value="{{model.pageId}}" style="display: none"/>
-        <button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
+        <input name="myFile" type="file" class="form-control"/>
+        <input name="widgetId" value="{{model.widget._id}}" style="display: none"/>
+        <input name="userId" value="{{model.userId}}" style="display: none"/>
+        <input name="websiteId" value="{{model.websiteId}}" style="display: none"/>
+        <input name="pageId" value="{{model.pageId}}" style="display: none"/>
+        <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+        <a class="btn btn-success btn-block"
+           href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widget._id}}/flicker">Search
+            Photo</a>
+        <a ng-click="model.deleteWidget(widget)" class="btn btn-danger btn-block">Delete</a>
     </form>
 
-    <a class="btn btn-warning btn-block" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widget._id}}/flicker">Search Photo</a>
-
-    <a ng-click="model.deleteWidget(widget)" class="btn btn-danger btn-block">Delete</a>
 </div>
