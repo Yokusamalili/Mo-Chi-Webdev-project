@@ -12,7 +12,7 @@
         function init() {
             WebsiteService.findWebsitesForUser(vm.userId)
                 .success(function (webs) {
-                    if(webs != '[]') {
+                    if(webs !== '[]') {
                         vm.websites = webs;
                     }
                 })
