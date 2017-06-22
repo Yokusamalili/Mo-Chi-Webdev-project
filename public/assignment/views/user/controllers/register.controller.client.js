@@ -19,13 +19,13 @@
             else {
                 UserService
                     .register(user.username, user.password)
-                    .success(function (user) {
-                        console.log(user);
+                    .then(function (response) {
+                        console.log(response.data);
+                        var user = response.data;
                         $location.url("/user/" + user._id);
-                    })
-                    .error(function (err) {
+                    }, function (err) {
                         vm.error = err;
-                    })
+                    });
             }
         }
     }

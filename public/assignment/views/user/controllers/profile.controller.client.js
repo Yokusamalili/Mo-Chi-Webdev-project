@@ -18,16 +18,15 @@
                     console.log(response);
                     console.log(response.data);
                     vm.user=response.data;
-                })
+                });
 
             //return all users for the database page
             UserService.allUsers()
-                .success(function (newusers) {
+                .then(function (newusers) {
                     if(newusers != '[]') {
                         vm.users = newusers;
                     }
-                })
-                .error(function () {
+                }, function (error) {
 
                 });
 

@@ -86,7 +86,10 @@
                 username: username,
                 password: password
             }
-            return $http.post('/api/register', user);
+            return $http.post('/api/register', user)
+                then(function (response) {
+                    return response.data;
+                });
         }
 
         function checkLoggedin() {
