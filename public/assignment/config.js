@@ -139,7 +139,7 @@
                 .checkLoggedin()
                 .then(
                     function (user) {
-                        if(user != '0') {
+                        if(user !== '0') {
                             $rootScope.currentUser = user;
                             deferred.resolve();
                         }
