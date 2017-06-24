@@ -93,7 +93,10 @@
         }
 
         function checkLoggedin() {
-            return $http.post("/api/checkLoggedin");
+            return $http.post("/api/checkLoggedin")
+            then(function (response) {
+                return response.data;
+            });
         }
 
     }
