@@ -1,17 +1,17 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <p class="navbar-text pull-right">
-            <a ng-click="model.updatePage(model.page)" class="navbar-link">
+            <a ng-click="model.createDetail(detail)" class="navbar-link">
                 <span class="glyphicon glyphicon-ok"></span>
             </a>
         </p>
         <p class="navbar-text pull-left">
-            <a class="navbar-link" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page">
+            <a class="navbar-link" href="#/user/{{model.userId}}/restaurant/{{model.restaurantId}}/detail">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </p>
         <div class="navbar-header">
-            <a class="navbar-brand">Edit Page</a>
+            <a class="navbar-brand">New Detail</a>
         </div>
     </div>
 </nav>
@@ -20,13 +20,12 @@
     <form>
         <div class="form-group">
             <label for="name">Name</label>
-            <input ng-model="model.page.name" type="text" class="form-control" id="name">
+            <input ng-model="detail.name" type="text" class="form-control" id="name" placeholder="Detail Name">
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" placeholder="Description" row="5">
+            <input type="text" class="form-control" id="description" placeholder="Description">
         </div>
-        <a ng-click="model.deletePage(model.page._id)" class="btn btn-danger btn-block">Delete</a>
     </form>
 </div>
 
@@ -39,5 +38,3 @@
         </div>
     </div>
 </footer>
-
-

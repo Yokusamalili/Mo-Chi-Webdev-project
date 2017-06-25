@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <p class="navbar-text pull-left">
-            <a class="navbar-link" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+            <a class="navbar-link" href="#/user/{{model.userId}}/restaurant/{{model.restaurantId}}/detail/{{model.detailId}}/widget">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </p>
@@ -14,21 +14,21 @@
 <div class="container-fluid contentPadding">
     <ul class="list-group">
         <li class="list-group-item">
-            <a ng-click="model.createWidget(model.pageId, {widgetType: 'HEADER'})">Header</a>
+            <a ng-click="model.createWidget(model.detailId, {widgetType: 'HEADER'})">Header</a>
         </li>
         <li class="list-group-item">
-            <a ng-click="model.createWidget(model.pageId, {widgetType: 'HTML'})">HTML</a>
-        </li>
-
-        <li class="list-group-item">
-            <a ng-click="model.createWidget(model.pageId, {widgetType: 'TEXT'})">TEXT</a>
+            <a ng-click="model.createWidget(model.detailId, {widgetType: 'HTML'})">HTML</a>
         </li>
 
         <li class="list-group-item">
-            <a ng-click="model.createWidget(model.pageId, {widgetType: 'IMAGE'})">Image</a>
+            <a ng-click="model.createWidget(model.detailId, {widgetType: 'TEXT'})">TEXT</a>
+        </li>
+
+        <li class="list-group-item">
+            <a ng-click="model.createWidget(model.detailId, {widgetType: 'IMAGE'})">Image</a>
         </li>
         <li class="list-group-item">
-            <a ng-click="model.createWidget(model.pageId, {widgetType: 'YOUTUBE'})">YouTube</a>
+            <a ng-click="model.createWidget(model.detailId, {widgetType: 'YOUTUBE'})">YouTube</a>
         </li>
     </ul>
 </div>

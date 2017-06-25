@@ -10,8 +10,8 @@
         var vm = this;
 
         vm.userId = $routeParams['uid'];
-        vm.websiteId = $routeParams['wid'];
-        vm.pageId = $routeParams['pid'];
+        vm.restaurantId = $routeParams['wid'];
+        vm.detailId = $routeParams['pid'];
         vm.wigetId = $routeParams['wgid'];
 
 
@@ -36,7 +36,7 @@
 
 
         function createWidget(pid, widget) {
-            widget.pageId = pid;
+            widget.detailId = pid;
             if(widget.widgetType == 'HEADER' && widget.size == null) {
                 widget.size = 2;
             }
@@ -48,7 +48,7 @@
                 .success(function (widget) {
                     console.log(widget);
                     console.log(widget._id);
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + widget._id);
+                    $location.url("/user/" + vm.userId + "/restaurant/" + vm.restaurantId + "/detail/" + vm.detailId + "/widget/" + widget._id);
 
                 })
                 .error(function () {

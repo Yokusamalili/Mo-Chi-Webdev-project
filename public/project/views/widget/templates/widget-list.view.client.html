@@ -1,12 +1,12 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <p class="navbar-text pull-right">
-            <a class="navbar-link" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
+            <a class="navbar-link" href="#/user/{{model.userId}}/restaurant/{{model.restaurantId}}/detail/{{model.detailId}}/widget/new">
                 <span class="glyphicon glyphicon-plus"></span>
             </a>
         </p>
         <p class="navbar-text pull-left">
-            <a class="navbar-link" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page">
+            <a class="navbar-link" href="#/user/{{model.userId}}/restaurant/{{model.restaurantId}}/detail">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </p>
@@ -19,7 +19,7 @@
 
 <div jga-sortable jga-sortable-callback="model.sort(start, end)" class="container-fluid contentPadding relative-position wam-widgets">
     <div ng-switch="widget.widgetType" ng-repeat="widget in model.widgets">
-        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}" class="pull-right">
+        <a href="#/user/{{model.userId}}/restaurant/{{model.restaurantId}}/detail/{{model.detailId}}/widget/{{widget._id}}" class="pull-right">
             <span class="glyphicon glyphicon-cog symbol-overlay"></span>
         </a>
 

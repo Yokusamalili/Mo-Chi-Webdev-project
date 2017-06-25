@@ -5,7 +5,7 @@
 
 module.exports = function (app,model) {
 
-    var pages = [
+    var details = [
         { "_id": 111, "name": "Post 1", "websiteId": 1000, "description": "Lorem1" },
         { "_id": 222, "name": "Post 2", "websiteId": 1000, "description": "Lorem2" },
         { "_id": 333, "name": "Post 3", "websiteId": 1000, "description": "Lorem3" },
@@ -22,19 +22,19 @@ module.exports = function (app,model) {
     ];
 
 
-    app.post('/api/website/:websiteId/page', createPage);
-    app.get('/api/pages/allpages', allPages);    //why I change it to api/user/alluser doesn;t work
-    app.get('/api/website/:websiteId/page', findAllPagesForWebsite);
-    app.get('/api/page/:pageId', findPageById);
-    app.put('/api/page/:pageId', updatePage);
-    app.delete('/api/page/:pageId', deletePage);
+    app.post('/api/restaurant/:websiteId/detail', createDetail);
+    app.get('/api/details/alldetails', allDetails);    //why I change it to api/user/alluser doesn;t work
+    app.get('/api/restaurant/:websiteId/detail', findAllDetailsForWebsite);
+    app.get('/api/detail/:detailId', findDetailById);
+    app.put('/api/detail/:detailId', updateDetail);
+    app.delete('/api/detail/:detailId', deleteDetail);
 
 
-    function deletePage(req, res) {
-        var pageId = req.params.pageId;
+    function deleteDetail(req, res) {
+        var detailId = req.params.detailId;
         model
-            .pageModel
-            .deletePage(pageId)
+            .detailModel
+            .deleteDetail(detailId)
             .then(
                 function(status){
                     res.sendStatus(200);
@@ -47,12 +47,12 @@ module.exports = function (app,model) {
 
 
 
-    function updatePage(req, res) {
-        var page = req.body;
-        var pageId = req.params.pageId;
+    function updateDetail(req, res) {
+        var detail = req.body;
+        var detailId = req.params.detailId;
         model
-            .pageModel
-            .updatePage(pageId, page)
+            .detailModel
+            .updateDetail(detailId, detail)
             .then(
                 function(status){
                     res.sendStatus(200);
@@ -64,15 +64,15 @@ module.exports = function (app,model) {
     }
 
 
-    function createPage(req, res) {
-        var page = req.body;
+    function createDetail(req, res) {
+        var detail = req.body;
         var wid = req.params.websiteId;
         model
-            .pageModel
-            .createPage(wid, page)
+            .detailModel
+            .createDetail(wid, detail)
             .then(
-                function(newPage){
-                    res.send(newPage);
+                function(newDetail){
+                    res.send(newDetail);
 
                 },
                 function(error){
@@ -81,16 +81,16 @@ module.exports = function (app,model) {
             );
     }
 
-    //finid page by id
-    function findPageById(req,res) {
-        var pageId = req.params.pageId;
+    //finid detail by id
+    function findDetailById(req,res) {
+        var detailId = req.params.detailId;
         model
-            .pageModel
-            .findPageById(pageId)
+            .detailModel
+            .findDetailById(detailId)
             .then(
-                function(page){
-                    if(page){
-                        res.send(page);
+                function(detail){
+                    if(detail){
+                        res.send(detail);
                     }
                     else{
                         res.send('0');
@@ -103,16 +103,16 @@ module.exports = function (app,model) {
     }
 
 
-    //findallPagesforwebsite
-    function findAllPagesForWebsite(req, res) {
+    //findallDetailsforwebsite
+    function findAllDetailsForWebsite(req, res) {
         var wid = req.params.websiteId;
         model
-            .pageModel
-            .findAllPagesForWebsite(wid)
+            .detailModel
+            .findAllDetailsForWebsite(wid)
             .then(
-                function(pages){
-                    if(pages){
-                        res.json(pages);
+                function(details){
+                    if(details){
+                        res.json(details);
                     }
                     else{
                         res.send('0');
@@ -125,8 +125,8 @@ module.exports = function (app,model) {
     }
 
     //testing purpose
-    function allPages(req, res) {
-        res.send(pages);
+    function allDetails(req, res) {
+        res.send(details);
 
 
     }

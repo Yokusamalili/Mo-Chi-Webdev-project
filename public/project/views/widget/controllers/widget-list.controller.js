@@ -11,8 +11,8 @@
         var vm = this;
 
         vm.userId = $routeParams['uid'];
-        vm.websiteId = $routeParams['wid'];
-        vm.pageId = $routeParams['pid'];
+        vm.restaurantId = $routeParams['wid'];
+        vm.detailId = $routeParams['pid'];
         vm.wgid = $routeParams['wgid'];
         vm.checkSafeHtml = checkSafeHtml;
         vm.checkSafeYouTubeUrl = checkSafeYouTubeUrl;
@@ -20,7 +20,7 @@
 
 
         function init() {
-            WidgetService.findWidgetsForPage(vm.pageId)
+            WidgetService.findWidgetsForDetail(vm.detailId)
                 .success(function (widgetList) {
                     vm.widgets = widgetList;
                 })
@@ -33,7 +33,7 @@
 
         function sort(start, end) {
             WidgetService
-                .sortItem(vm.pageId, start, end)
+                .sortItem(vm.detailId, start, end)
                 .success(function(code){})
                 .catch(function(error){
                     console.log(error);

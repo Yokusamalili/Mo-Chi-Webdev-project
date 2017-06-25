@@ -1,19 +1,19 @@
 (function(){
     angular
         .module("WebAppMaker")
-        .controller("WebsiteListController", WebsiteListController);
+        .controller("RestaurantListController", RestaurantListController);
 
-    function WebsiteListController($routeParams, WebsiteService) {
+    function RestaurantListController($routeParams, RestaurantService) {
         var vm = this;
 
         vm.userId = $routeParams.uid;
 
 
         function init() {
-            WebsiteService.findWebsitesForUser(vm.userId)
+            RestaurantService.findRestaurantsForUser(vm.userId)
                 .success(function (webs) {
                     if(webs != '[]') {
-                        vm.websites = webs;
+                        vm.restaurants = webs;
                     }
                 })
                 .error(function () {

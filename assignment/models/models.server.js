@@ -15,15 +15,15 @@ module.exports = function() {
 
 
     var userModel = require("./user/user.model.server.js")();
-    var websiteModel = require("./website/website.model.server.js")();
-    var pageModel = require("./page/page.model.server.js")();
+    var restaurantModel = require("./restaurant/restaurant.model.server.js")();
+    var detailModel = require("./detail/detail.model.server.js")();
     var widgetModel = require("./widget/widget.model.server.js")();
 
 
     var model = {
         userModel: userModel,
-        websiteModel:websiteModel,
-        pageModel:pageModel,
+        restaurantModel:restaurantModel,
+        detailModel:detailModel,
         widgetModel:widgetModel
     };
 

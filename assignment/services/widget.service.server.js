@@ -85,7 +85,7 @@ module.exports = function (app, model) {
             var mimetype = myFile.mimetype;
 
             console.log(originalname);
-            var url = "/project/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+            var url = "/project/#/user/" + userId + "/restaurant/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
 
             model
                 .widgetModel

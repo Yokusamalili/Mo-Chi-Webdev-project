@@ -5,19 +5,19 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .controller("PageListController", PageListController);
+        .controller("DetailListController", DetailListController);
 
-    function PageListController($routeParams, PageService) {
+    function DetailListController($routeParams, DetailService) {
         var vm = this;
 
         vm.userId = $routeParams.uid;
         vm.websiteId = $routeParams.wid;
 
         function  init() {
-            PageService.findAllPagesForWebsite(vm.websiteId)
+            DetailService.findAllDetailsForWebsite(vm.websiteId)
                 .success(function (ps) {
                     if(ps != '[]') {
-                        vm.pages = ps;
+                        vm.details = ps;
                     }
                 })
                 .error(function () {

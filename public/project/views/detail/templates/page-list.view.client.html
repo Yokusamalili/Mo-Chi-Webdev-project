@@ -1,28 +1,27 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <p class="navbar-text pull-right">
-            <a class="navbar-link" href="#/user/{{model.userId}}/website/new">
+            <a class="navbar-link" href="#/user/{{model.userId}}/restaurant/{{model.restaurantId}}/detail/new">
                 <span class="glyphicon glyphicon-plus"></span>
             </a>
         </p>
         <p class="navbar-text pull-left">
-            <a href="#/user/{{model.userId}}" class="navbar-link">
+            <a class="navbar-link" href="#/user/{{model.userId}}/restaurant">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </p>
         <div class="navbar-header">
-            <a class="navbar-brand">Websites</a>
+            <a class="navbar-brand">Details</a>
         </div>
     </div>
 </nav>
 
-
 <div class="container-fluid contentPadding">
     <ul class="list-group">
-        <li ng-repeat= "website in model.websites" class="list-group-item">
-            <a href="#/user/{{model.userId}}/website/{{website._id}}/page">{{website.name}}</a>
+        <li ng-repeat= "detail in model.details" class="list-group-item">
+            <a href="#/user/{{model.userId}}/restaurant/{{model.restaurantId}}/detail/{{detail._id}}/widget">{{detail.name}}</a>
             <div class="listConf pull-right">
-                <a href="#/user/{{model.userId}}/website/{{website._id}}">
+                <a href="#/user/{{model.userId}}/restaurant/{{model.restaurantId}}/detail/{{detail._id}}">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
             </div>

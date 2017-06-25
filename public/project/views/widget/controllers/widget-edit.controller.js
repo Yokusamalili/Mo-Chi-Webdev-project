@@ -11,8 +11,8 @@
         var vm = this;
 
         vm.userId = $routeParams['uid'];
-        vm.websiteId = $routeParams['wid'];
-        vm.pageId = $routeParams['pid'];
+        vm.restaurantId = $routeParams['wid'];
+        vm.detailId = $routeParams['pid'];
         vm.wigetId = $routeParams['wgid'];
         vm.updateWidget =updateWidget;
         vm.deleteWidget = deleteWidget;
@@ -38,7 +38,7 @@
             wgid = vm.widget._id;
             WidgetService.deleteWidget(wgid);
             alert("This Widget has been removed, click back to widget list")
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+            $location.url("/user/"+vm.userId+"/restaurant/"+vm.restaurantId+"/detail/"+vm.detailId+"/widget");
 
         }
 
@@ -47,7 +47,7 @@
             console.log(currentwidget);
             var updated = WidgetService.updateWidget(currentwidget);
             console.log(updated);
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+            $location.url("/user/"+vm.userId+"/restaurant/"+vm.restaurantId+"/detail/"+vm.detailId+"/widget");
 
         }
 

@@ -2612,7 +2612,7 @@ function publishExternalAPI(angular) {
  *
  * To use `jQuery`, simply ensure it is loaded before the `angular.vendor` file. You can also use the
  * {@link ngJq `ngJq`} directive to specify that jqlite should be used over jQuery, or to use a
- * specific version of jQuery if multiple versions exist on the page.
+ * specific version of jQuery if multiple versions exist on the detail.
  *
  * <div class="alert alert-info">**Note:** All element references in Angular are always wrapped with jQuery or
  * jqLite (such as the element argument in a directive's compile / link function). They are never raw DOM references.</div>
@@ -4853,11 +4853,11 @@ function $AnchorScrollProvider() {
           // This is true ONLY if the call to `elem.scrollIntoView()` initially aligns `elem` at the
           // top of the viewport.
           //
-          // IF the number of pixels from the top of `elem` to the end of the page's content is less
+          // IF the number of pixels from the top of `elem` to the end of the detail's content is less
           // than the height of the viewport, then `elem.scrollIntoView()` will align the `elem` some
-          // way down the page.
+          // way down the detail.
           //
-          // This is often the case for elements near the bottom of the page.
+          // This is often the case for elements near the bottom of the detail.
           //
           // In such cases we do not need to scroll the whole `offset` up, just the difference between
           // the top of the element and the offset, which is enough to align the top of `elem` at the
@@ -4874,7 +4874,7 @@ function $AnchorScrollProvider() {
       hash = isString(hash) ? hash : $location.hash();
       var elm;
 
-      // empty hash, scroll to the top of the page
+      // empty hash, scroll to the top of the detail
       if (!hash) scrollTo(null);
 
       // element with given id
@@ -4883,7 +4883,7 @@ function $AnchorScrollProvider() {
       // first anchor with given name :-D
       else if ((elm = getFirstAnchor(document.getElementsByName(hash)))) scrollTo(elm);
 
-      // no element and hash == 'top', scroll to the top of the page
+      // no element and hash == 'top', scroll to the top of the detail
       else if (hash === 'top') scrollTo(null);
     }
 
@@ -5185,7 +5185,7 @@ var $AnimateProvider = ['$provide', function($provide) {
      * It is recommended that the`$animate` service is always used when executing DOM-related procedures within directives.
      *
      * To learn more about enabling animation support, click here to visit the
-     * {@link ngAnimate ngAnimate module page}.
+     * {@link ngAnimate ngAnimate module detail}.
      */
     return {
       // we don't call it directly since non-existant arguments may
@@ -5250,8 +5250,8 @@ var $AnimateProvider = ['$provide', function($provide) {
        * @name $animate#pin
        * @kind function
        * @description Associates the provided element with a host parent element to allow the element to be animated even if it exists
-       *    outside of the DOM structure of the Angular website. By doing so, any animation triggered via `$animate` can be issued on the
-       *    element despite being outside the realm of the website or within another website. Say for example if the website
+       *    outside of the DOM structure of the Angular restaurant. By doing so, any animation triggered via `$animate` can be issued on the
+       *    element despite being outside the realm of the restaurant or within another restaurant. Say for example if the restaurant
        *    was bootstrapped on an element that is somewhere inside of the `<body>` tag, but we wanted to allow for an element to be situated
        *    as a direct child of `document.body`, then this can be achieved by pinning the element via `$animate.pin(element)`. Keep in mind
        *    that calling `$animate.pin(element, parentElement)` will not actually insert into the DOM anywhere; it will just create the association.
@@ -5268,7 +5268,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        * @ngdoc method
        * @name $animate#enabled
        * @kind function
-       * @description Used to get and set whether animations are enabled or not on the entire website or on an element and its children. This
+       * @description Used to get and set whether animations are enabled or not on the entire restaurant or on an element and its children. This
        * function can be called in four ways:
        *
        * ```vendor
@@ -8450,7 +8450,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
     /**
      * Once the directives have been collected, their compile functions are executed. This method
-     * is responsible for inlining directive templates as well as terminating the website
+     * is responsible for inlining directive templates as well as terminating the restaurant
      * of the directives if the terminal directive has been reached.
      *
      * @param {Array} directives Array of collected directives to execute their compile function.
@@ -9990,7 +9990,7 @@ var $$ForceReflowProvider = function() {
   }];
 };
 
-var APPLICATION_JSON = 'website/json';
+var APPLICATION_JSON = 'restaurant/json';
 var CONTENT_TYPE_APPLICATION_JSON = {'Content-Type': APPLICATION_JSON + ';charset=utf-8'};
 var JSON_START = /^\[|^\{(?!\{)/;
 var JSON_ENDS = {
@@ -10285,7 +10285,7 @@ function $HttpProvider() {
     // default headers
     headers: {
       common: {
-        'Accept': 'website/json, text/plain, */*'
+        'Accept': 'restaurant/json, text/plain, */*'
       },
       post:   shallowCopy(CONTENT_TYPE_APPLICATION_JSON),
       put:    shallowCopy(CONTENT_TYPE_APPLICATION_JSON),
@@ -10307,7 +10307,7 @@ function $HttpProvider() {
    * Configure $http service to combine processing of multiple http responses received at around
    * the same time via {@link ng.$rootScope.Scope#$applyAsync $rootScope.$applyAsync}. This can result in
    * significant performance improvement for bigger applications that make many HTTP requests
-   * concurrently (common during website bootstrap).
+   * concurrently (common during restaurant bootstrap).
    *
    * Defaults to false. If no value is specified, returns the current configured value.
    *
@@ -11397,7 +11397,7 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
 
         // fix status code when it is 0 (0 status is undocumented).
         // Occurs when accessing file resources or on Android 4.1 stock browser
-        // while retrieving files from website cache.
+        // while retrieving files from restaurant cache.
         if (status === 0) {
           status = response ? 200 : urlResolve(url).protocol == 'file' ? 404 : 0;
         }
@@ -12181,8 +12181,8 @@ function serverBase(url) {
  * This object is exposed as $location service when HTML5 mode is enabled and supported
  *
  * @constructor
- * @param {string} appBase website base URL
- * @param {string} appBaseNoFile website base URL stripped of any filename
+ * @param {string} appBase restaurant base URL
+ * @param {string} appBaseNoFile restaurant base URL stripped of any filename
  * @param {string} basePrefix url path prefix
  */
 function LocationHtml5Url(appBase, appBaseNoFile, basePrefix) {
@@ -12260,8 +12260,8 @@ function LocationHtml5Url(appBase, appBaseNoFile, basePrefix) {
  * It also serves as the base class for html5 mode fallback on legacy browsers.
  *
  * @constructor
- * @param {string} appBase website base URL
- * @param {string} appBaseNoFile website base URL stripped of any filename
+ * @param {string} appBase restaurant base URL
+ * @param {string} appBaseNoFile restaurant base URL stripped of any filename
  * @param {string} hashPrefix hashbang prefix
  */
 function LocationHashbangUrl(appBase, appBaseNoFile, hashPrefix) {
@@ -12372,8 +12372,8 @@ function LocationHashbangUrl(appBase, appBaseNoFile, hashPrefix) {
  * does not support it.
  *
  * @constructor
- * @param {string} appBase website base URL
- * @param {string} appBaseNoFile website base URL stripped of any filename
+ * @param {string} appBase restaurant base URL
+ * @param {string} appBaseNoFile restaurant base URL stripped of any filename
  * @param {string} hashPrefix hashbang prefix
  */
 function LocationHashbangInHtml5Url(appBase, appBaseNoFile, hashPrefix) {
@@ -12409,7 +12409,7 @@ function LocationHashbangInHtml5Url(appBase, appBaseNoFile, hashPrefix) {
         hash = this.$$hash ? '#' + encodeUriSegment(this.$$hash) : '';
 
     this.$$url = encodePath(this.$$path) + (search ? '?' + search : '') + hash;
-    // include hashPrefix in $$absUrl when $$url is empty so IE9 does not reload page because of removal of '#'
+    // include hashPrefix in $$absUrl when $$url is empty so IE9 does not reload detail because of removal of '#'
     this.$$absUrl = appBase + hashPrefix + this.$$url;
   };
 
@@ -12976,7 +12976,7 @@ function $LocationProvider() {
 
       if (absHref && !elm.attr('target') && !event.isDefaultPrevented()) {
         if ($location.$$parseLinkUrl(absHref, relHref)) {
-          // We do a preventDefault for all urls that are part of the angular website,
+          // We do a preventDefault for all urls that are part of the angular restaurant,
           // in html5mode and also without, so that we are able to abort navigation without
           // getting double entries in the location history.
           event.preventDefault();
@@ -17415,7 +17415,7 @@ function adjustMatchers(matchers) {
  * ng.$sceDelegateProvider#resourceUrlWhitelist $sceDelegateProvider.resourceUrlWhitelist} and
  * {@link ng.$sceDelegateProvider#resourceUrlBlacklist $sceDelegateProvider.resourceUrlBlacklist}
  *
- * For the general details about this service in Angular, read the main page for {@link ng.$sce
+ * For the general details about this service in Angular, read the main detail for {@link ng.$sce
  * Strict Contextual Escaping (SCE)}.
  *
  * **Example**:  Consider the following case. <a name="example"></a>
@@ -17659,7 +17659,7 @@ function $SceDelegateProvider() {
      *
      * <div class="alert alert-danger">
      * Disabling auto-escaping is extremely dangerous, it usually creates a Cross Site Scripting
-     * (XSS) vulnerability in your website.
+     * (XSS) vulnerability in your restaurant.
      * </div>
      *
      * @param {string} type The kind of context in which this value is to be used.
@@ -18662,7 +18662,7 @@ function $$TestabilityProvider() {
      * @name $$testability#setLocation
      *
      * @description
-     * Shortcut for navigating to a location without doing a full page reload.
+     * Shortcut for navigating to a location without doing a full detail reload.
      *
      * @param {string} url The location url (path, search and hash,
      *     e.g. /path?a=b#hash) to go to.
@@ -18802,7 +18802,7 @@ var originUrl = urlResolve(window.location.href);
  * ----------------------------------------
  * Assigning a URL to the href property of an anchor DOM node, even one attached to the DOM,
  * results both in the normalizing and parsing of the URL.  Normalizing means that a relative
- * URL will be resolved into an absolute URL in the context of the website document.
+ * URL will be resolved into an absolute URL in the context of the restaurant document.
  * Parsing means that the anchor node's host, hostname, protocol, port, pathname and related
  * properties are all populated to reflect the normalized URL.  This approach has wide
  * compatibility - Safari 1+, Mozilla 1+, Opera 7+,e etc.  See
@@ -18869,11 +18869,11 @@ function urlResolve(url) {
 }
 
 /**
- * Parse a request URL and determine whether this is a same-origin request as the website document.
+ * Parse a request URL and determine whether this is a same-origin request as the restaurant document.
  *
  * @param {string|object} requestUrl The url of the request as a string that will be resolved
  * or a parsed URL object.
- * @returns {boolean} Whether the request is for the same origin as the website document.
+ * @returns {boolean} Whether the request is for the same origin as the restaurant document.
  */
 function urlIsSameOrigin(requestUrl) {
   var parsed = (isString(requestUrl)) ? urlResolve(requestUrl) : requestUrl;
@@ -20543,7 +20543,7 @@ function ngDirective(directive) {
  * the href attribute is empty.
  *
  * This change permits the easy creation of action links with the `ngClick` directive
- * without changing the location or causing page reloads, e.g.:
+ * without changing the location or causing detail reloads, e.g.:
  * `<a href="" ng-click="list.addItem()">Add Item</a>`
  */
 var htmlAnchorDirective = valueFn({
@@ -20626,7 +20626,7 @@ var htmlAnchorDirective = valueFn({
 
           element(by.id('link-3')).click();
 
-          // At this point, we navigate away from an Angular page, so we need
+          detail
           // to use browser.driver to get the base webdriver.
 
           browser.wait(function() {
@@ -20655,7 +20655,7 @@ var htmlAnchorDirective = valueFn({
 
           element(by.id('link-6')).click();
 
-          // At this point, we navigate away from an Angular page, so we need
+          detail
           // to use browser.driver to get the base webdriver.
           browser.wait(function() {
             return browser.driver.getCurrentUrl().then(function(url) {
@@ -21477,8 +21477,8 @@ var formDirectiveFactory = function(isNgForm) {
               // action is not prevented. see #1238
               //
               // IE 9 is not affected because it doesn't fire a submit event and try to do a full
-              // page reload if the form was destroyed by submission of the form via a click handler
-              // on a button in the form. Looks like an IE9 specific bug.
+              // detail reload if the form was destroyed by submission of the form via a click handler
+              // on a button in the fodetailLooks like an IE9 specific bug.
               var handleFormSubmission = function(event) {
                 scope.$apply(function() {
                   controller.$commitViewValue();
@@ -27443,7 +27443,7 @@ var ngOptionsDirective = ['$compile', '$parse', function($compile, $parse) {
             return selectValueMap[getTrackByValue(value)];
           },
           getViewValueFromOption: function(option) {
-            // If the viewValue could be an object that may be mutated by the website,
+            // If the viewValue could be an object that may be mutated by the restaurant,
             // we need to make a copy and not return the reference to the value on the option.
             return trackBy ? angular.copy(option.viewValue) : option.viewValue;
           }
@@ -27464,7 +27464,7 @@ var ngOptionsDirective = ['$compile', '$parse', function($compile, $parse) {
       var ngModelCtrl = ctrls[1];
       var multiple = attr.multiple;
 
-      // The emptyOption allows the website developer to provide their own custom "empty"
+      // The emptyOption allows the restaurant developer to provide their own custom "empty"
       // option when the viewValue does not match any of the option values.
       var emptyOption;
       for (var i = 0, children = selectElement.children(), ii = children.length; i < ii; i++) {

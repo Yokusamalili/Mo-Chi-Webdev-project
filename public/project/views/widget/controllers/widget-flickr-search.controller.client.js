@@ -10,8 +10,8 @@
     function FlickrController($routeParams, $location, FlickrService, WidgetService){
         var vm = this;
         vm.userId = $routeParams['uid'];
-        vm.websiteId = $routeParams['wid'];
-        vm.pageId = $routeParams['pid'];
+        vm.restaurantId = $routeParams['wid'];
+        vm.detailId = $routeParams['pid'];
         vm.wigetId = $routeParams['wgid'];
         vm.searchPhotos = searchPhotos;
         vm.selectPhoto = selectPhoto;
@@ -36,7 +36,7 @@
             WidgetService
                 .selectFlickr(vm.wigetId, vm.url)
                 .then(function(status){
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.wigetId);
+                    $location.url("/user/" + vm.userId + "/restaurant/" + vm.restaurantId + "/detail/" + vm.detailId + "/widget/" + vm.wigetId);
                 });
         }
 

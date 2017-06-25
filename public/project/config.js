@@ -36,65 +36,65 @@
             })
 
 
-            .when("/user/:uid/website", {
-                templateUrl: "views/website/templates/website-list.view.client.html",
-                controller: "WebsiteListController",
+            .when("/user/:uid/restaurant", {
+                templateUrl: "views/restaurant/templates/website-list.view.client.html",
+                controller: "RestaurantListController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/new", {
-                templateUrl: "views/website/templates/website-new.view.client.html",
-                controller: "WebsiteNewController",
-                controllerAs: "model"
-            })
-
-            .when("/user/:uid/website/:wid", {
-                templateUrl: "views/website/templates/website-edit.view.client.html",
-                controller: "WebsiteEditController",
+            .when("/user/:uid/restaurant/new", {
+                templateUrl: "views/restaurant/templates/website-new.view.client.html",
+                controller: "RestaurantNewController",
                 controllerAs: "model"
             })
 
-
-            .when("/user/:uid/website/:wid/page", {
-                templateUrl: "views/page/templates/page-list.view.client.html",
-                controller: "PageListController",
+            .when("/user/:uid/restaurant/:wid", {
+                templateUrl: "views/restaurant/templates/website-edit.view.client.html",
+                controller: "RestaurantEditController",
                 controllerAs: "model"
             })
 
 
-
-            .when("/user/:uid/website/:wid/page/new", {
-                templateUrl: "views/page/templates/page-new.view.client.html",
-                controller: "PageNewController",
+            .when("/user/:uid/restaurant/:wid/detail", {
+                templateUrl: "views/detail/templates/page-list.view.client.html",
+                controller: "DetailListController",
                 controllerAs: "model"
             })
 
 
-            .when("/user/:uid/website/:wid/page/:pid", {
-                templateUrl: "views/page/templates/page-edit.view.client.html",
-                controller: "PageEditController",
+
+            .when("/user/:uid/restaurant/:wid/detail/new", {
+                templateUrl: "views/detail/templates/page-new.view.client.html",
+                controller: "DetailNewController",
                 controllerAs: "model"
             })
 
 
-            .when("/user/:uid/website/:wid/page/:pid/widget", {
+            .when("/user/:uid/restaurant/:wid/detail/:pid", {
+                templateUrl: "views/detail/templates/page-edit.view.client.html",
+                controller: "DetailEditController",
+                controllerAs: "model"
+            })
+
+
+            .when("/user/:uid/restaurant/:wid/detail/:pid/widget", {
                 templateUrl: "views/widget/templates/widget-list.view.client.html",
                 controller: "WidgeListController",
                 controllerAs: "model"
             })
 
-            .when("/user/:uid/website/:wid/page/:pid/widget/new", {
+            .when("/user/:uid/restaurant/:wid/detail/:pid/widget/new", {
                 templateUrl: "views/widget/templates/widget-chooser.view.client.html",
                 controller: "WidgeChooserController",
                 controllerAs: "model"
             })
 
-            .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
+            .when("/user/:uid/restaurant/:wid/detail/:pid/widget/:wgid", {
                 templateUrl: "views/widget/templates/widget-edit.view.client.html",
                 controller: "WidgeEditController",
                 controllerAs: "model"
             })
 
-            .when("/user/:uid/website/:wid/page/:pid/widget/:wgid/flicker", {
+            .when("/user/:uid/restaurant/:wid/detail/:pid/widget/:wgid/flicker", {
                 templateUrl: 'views/widget/templates/widget-flickr-search.view.client.html',
                 controller:'FlickrController',
                 controllerAs:"model"
