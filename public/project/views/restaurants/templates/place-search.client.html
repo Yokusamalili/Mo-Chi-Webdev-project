@@ -22,10 +22,11 @@
         <h2> Results</h2>
 
         <div class="row">
-            <div class="col-sm-6 col-md-3" ng-repeat="restaurant in model.restaurants">
+            <div class="col-md-6 col-md-3" ng-repeat="restaurant in model.restaurants">
                 <div class="thumbnail">
-                    <img class="my-image" src="{{restaurant.image_url}}" alt="">
+                    <!--<img class="my-image" src="{{restaurant.image_url}}" alt="">-->
                     <div class="caption">
+                        <img class="my-image" src="{{restaurant.image_url}}" alt="">
                         <h3>{{restaurant.name | limitTo:20}}{{restaurant.name.length > 20 ? "..." : ""}}</h3>
                         <p><b class="wb-red ">Address: </b>{{restaurant.address |
                             limitTo:15}}{{restaurant.address.length > 15 ? "..." : ""}}</p>
@@ -34,7 +35,6 @@
                             <a href="#/user/restaurant/{{restaurant.id}}/articles" class="btn btn-primary"
                                role="button">Join the Line</a>
                             <a href="#/user/restaurant/{{restaurant.id}}" class="btn btn-default" role="button">More Info</a>
-
                         </p>
                     </div>
                 </div>

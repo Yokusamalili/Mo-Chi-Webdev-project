@@ -1,79 +1,85 @@
-<a href="#/home"> <h1 class="cust">Waitless</h1></a>
-<div class="container-fluid">
+<div ng-include src="'views/user/templates/navbar.view.client.html'"></div>
 
-    <div class="row">
-        <div class="col-xs-12 col-md-4 col-sm-4">
-            <img class="thumbnail profile-image-size"
-                 src="../../../images/default.png" alt="" ng-show="!model.user.imgUrl">
-            <img class="thumbnail profile-image-size img-rounded"
-                 ng-show="model.user.imgUrl" ng-src="{{model.user.imgUrl}}">
-        </div>
+<table class="pro-cust">
+    <tr>
+        <td style="width: 40%">
+            <div class="row">
+                <div class="col-xs-12 col-md-4 col-sm-4">
+                    <img class="thumbnail profile-image-size"
+                         src="../../../../imgs/user.png" alt="" ng-show="!model.user.imgUrl">
+                    <img class="thumbnail profile-image-size img-rounded"
+                         ng-show="model.user.imgUrl" ng-src="{{model.user.imgUrl}}">
+                    <input id="upload" type="file" class="form-control"
+                           name="profileImg" style="width: 270%">
+                    <div class="alert alert-danger" ng-show="model.error">
+                        {{model.error}}
+                    </div>
 
-        <div class="alert alert-danger" ng-show="model.error">
-            {{model.error}}
-        </div>
+                    <div class="alert alert-success" ng-show="model.message">
+                        {{model.message}}
+                    </div>
+                </div>
+            </div>
+        </td>
 
-        <div class="alert alert-success" ng-show="model.message">
-            {{model.message}}
-        </div>
+        <td style="width: 90%; margin-right: 20%">
+            <form name="profileEditForm" action="{{model.updateProfilePicture}}" method="post"
+                  enctype="multipart/form-data"
+                  novalidate>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input value="{{model.user.username}}" type="text" name="username" class="form-control"
+                           placeholder="Username" required/>
+                    <p ng-show="profileEditForm.username.$invalid && !profileEditForm.username.$pristine"
+                       class="help-block">Please enter a User Name.</p>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input value="{{model.user.password}}" type="password" name="password" class="form-control"
+                           placeholder="Password" required/>
+                    <p ng-show="profileEditForm.password.$invalid && !profileEditForm.password.$pristine"
+                       class="help-block">Please enter a Password.</p>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input value="{{model.user.email}}" type="email" name="email" class="form-control"
+                           placeholder="Email" required/>
+                    <p ng-show="profileEditForm.email.$invalid && !profileEditForm.email.$pristine"
+                       class="help-block">Please enter an Email.</p>
+                </div>
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input value="{{model.user.firstName}}" name="firstName" type="text" class="form-control"
+                           placeholder="First Name" required/>
+                    <p ng-show="profileEditForm.firstName.$invalid && !profileEditForm.firstName.$pristine"
+                       class="help-block">Please enter your First Name.</p>
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input value="{{model.user.lastName}}" name="lastName" type="text" class="form-control"
+                           placeholder="Last Name" required/>
+                    <p ng-show="profileEditForm.lastName.$invalid && !profileEditForm.lastName.$pristine"
+                       class="help-block">Please enter your Last Name</p>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit"
+                            class="btn btn-success btn-block" ng-disabled="profileEditForm.$invalid">Update
+                    </button>
+                </div>
+            </form>
+
+            <a ng-click="model.deleteU()"
+               class="btn btn-danger btn-block">
+                Delete
+            </a>
+            </div>
+        </td>
+    </tr>
+
+
+    <div class="container-fluid">
+
     </div>
-    <form name="profileEditForm" action="{{model.updateProfilePicture}}" method="post" enctype="multipart/form-data"
-          novalidate>
-        <div class="form-group">
 
-            <input value="{{model.user.username}}" type="text" name="username" class="form-control"
-                   placeholder="Username" required/>
-            <p ng-show="profileEditForm.username.$invalid && !profileEditForm.username.$pristine"
-               class="help-block">Please provide a User Name.</p>
-        </div>
-        <div class="form-group">
-
-            <input value="{{model.user.password}}" type="password" name="password" class="form-control"
-                   placeholder="Password" required/>
-            <p ng-show="profileEditForm.password.$invalid && !profileEditForm.password.$pristine"
-               class="help-block">Please provide a Password.</p>
-        </div>
-        <div class="form-group">
-
-            <input value="{{model.user.email}}" type="email" name="email" class="form-control"
-                   placeholder="Email" required/>
-            <p ng-show="profileEditForm.email.$invalid && !profileEditForm.email.$pristine"
-               class="help-block">Please provide a Email.</p>
-        </div>
-        <div class="form-group">
-
-            <input value="{{model.user.firstName}}" name="firstName" type="text" class="form-control"
-                   placeholder="First Name" required/>
-            <p ng-show="profileEditForm.firstName.$invalid && !profileEditForm.firstName.$pristine"
-               class="help-block">Please provide your First Name.</p>
-        </div>
-        <div class="form-group">
-
-            <input value="{{model.user.lastName}}" name="lastName" type="text" class="form-control"
-                   placeholder="Last Name" required/>
-            <p ng-show="profileEditForm.lastName.$invalid && !profileEditForm.lastName.$pristine"
-               class="help-block">Please provide your Last Name.</p>
-        </div>
-        <div class="form-group">
-            <label for="upload">Profile Pic</label>
-            <input id="upload" type="file" class="form-control"
-                   name="profileImg">
-        </div>
-        <div class="form-group">
-            <button type="submit"
-                    class="btn btn-success btn-block" ng-disabled="profileEditForm.$invalid">Update
-            </button>
-        </div>
-    </form>
-
-    <a class="btn btn-primary btn-block"
-       ng-href="#/user/restaurants">Restaurants</a>
-
-    <a ng-click="model.deleteU()"
-       class="btn btn-danger btn-block">
-        Delete
-    </a>
-
-    <a class="btn btn-danger  btn-block"
-       ng-click="model.logout()">Logout</a>
-</div>
+</table>

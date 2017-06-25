@@ -107,7 +107,7 @@
                     resolve: {checkLoggedIn: checkLoggedIn}
                 })
                 .when("/home",{
-                    templateUrl: 'views/restaurant_home/templates/home.html',
+                    templateUrl: 'views/restaurants/templates/home.html',
                     controller: "HomeSearchController",
                     controllerAs: "model",
                     resolve: {
@@ -116,7 +116,7 @@
 
                 })
                 .when("/user/restaurant/:rid/articles",{
-                    templateUrl: 'views/restaurant_home/templates/join-line.html',
+                    templateUrl: 'views/restaurants/templates/join-line.html',
                     controller: "BlogController",
                     controllerAs: "model",
                     resolve: {
@@ -124,7 +124,7 @@
                     }
                 })
                 .when("/user/restaurant/:rid",{
-                    templateUrl: 'views/restaurant_home/templates/infoPage.html',
+                    templateUrl: 'views/restaurants/templates/infoPage.html',
                     controller: "ReviewController",
                     controllerAs: "model",
                     resolve: {
@@ -132,7 +132,7 @@
                     }
                 })
                 .when("/user/search/restaurants/:sid",{
-                    templateUrl: 'views/restaurant_home/templates/place-search.client.html',
+                    templateUrl: 'views/restaurants/templates/place-search.client.html',
                     controller: "HomeController",
                     controllerAs: "model",
                     resolve: {
@@ -140,7 +140,7 @@
                     }
                 })
                 .when("/user/restaurants",{
-                    templateUrl: 'views/restaurant_home/templates/home.html',
+                    templateUrl: 'views/restaurants/templates/home.html',
                     controller: "HomeSearchController",
                     controllerAs: "model",
                     resolve: {
@@ -156,7 +156,7 @@
                     }
                 })
                 .when("/", {
-                    templateUrl: 'views/restaurant_home/templates/home.html',
+                    templateUrl: 'views/restaurants/templates/home.html',
                     controller: "HomeSearchController",
                     controllerAs: "model",
                     resolve: {

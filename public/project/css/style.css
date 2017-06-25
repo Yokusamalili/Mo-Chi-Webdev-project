@@ -4,7 +4,7 @@
 }
 
 .coralbg {
-    background-color: #FA396F;
+    background-color: #4e70cc;
 }
 
 .coral {
@@ -15,6 +15,9 @@ body {
     /*padding-top: 40px;*/
     /*padding-bottom: 56px;*/
     background-image: url("../../imgs/asian-food-6.jpg");
+}
+.pro-cust{
+    margin-left: 25%;
 }
 
 .turqbg {
@@ -40,7 +43,7 @@ body {
 }
 
 .wb-red {
-    color: #822433;
+    color: #143f82;
 }
 
 .profile-image-size {
@@ -154,9 +157,6 @@ div.user-menu-container .thumbnail {
     color: white;
 }
 
-.color-nav {
-    background-color: #ff6e56 !important;
-}
 
 .g-item{
     width: 250px;
@@ -182,11 +182,11 @@ div.user-menu-container .thumbnail {
 
 .nav-pills > li.active > a, .nav-pills > li.active > a:focus {
     color: white;
-    background-color: #CB202D!important;
+    background-color: #315582 !important;
 }
 
 .nav-pills > li.active > a:hover {
-    background-color: #CB202D!important;
+    background-color: #143f82 !important;
     color:white;
 }
 
