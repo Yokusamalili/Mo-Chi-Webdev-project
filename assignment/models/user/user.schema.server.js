@@ -11,11 +11,6 @@ module.exports = function () {
         lastname: String,
         email: String,
         websites: [WebsiteSchema],
-        facebook: {
-            id:    String,
-            token: String,
-            displayName: String
-        },
     }, {collection: "user"});
     return UserSchema;
 }

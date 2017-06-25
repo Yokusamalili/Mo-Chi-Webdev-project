@@ -2,7 +2,7 @@
 
 module.exports = function() {
 
-    var connectionString = 'mongodb://localhost/chi-mo-webdev';
+  var connectionString = 'mongodb://localhost/chi-mo-webdev';
     connectionString = 'mongodb://yokusamalili:cinderella99@ds143141.mlab.com:43141/heroku_ld867kn4';
     if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
         var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
