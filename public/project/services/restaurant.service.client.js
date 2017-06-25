@@ -9,17 +9,30 @@
         .factory("RestaurantService", RestaurantService);
 
     function RestaurantService($http) {
-
+        var searchURL =  "https://opentable.herokuapp.com/api/restaurants?city=&page=&name=&zip=&per_page=20";
 
         var api = {
             findRestaurantsForUser: findRestaurantsForUser,
             findRestaurantById: findRestaurantById,
             createRestaurant: createRestaurant,
             updateRestaurant:updateRestaurant,
-            removeRestaurant:removeRestaurant
+            removeRestaurant:removeRestaurant,
+            findRestaurantsByCity : findRestaurantsByCity,
+            findRestaurantsByNameAndCity : findRestaurantsByNameAndCity
         };
         return api;
 
+        function findRestaurantsByCity(city) {
+            var url = searchURL
+                .replace("city=", "city="+city);
+            return $http.get(url);
+        }
+
+        function findRestaurantsByNameAndCity(name) {
+            var url = searchURL
+                .replace("name=", "name="+name);
+            return $http.get(url);
+        }
 
         function createRestaurant(restaurant) {
             var newWeb = {
@@ -35,11 +48,18 @@
         }
 
         function findRestaurantsForUser(uid) {
-            console.log("----------------FindRestaurantForUser----------------------")
+            console.log("----------------FindRestaurantForUser----------------------");
             var url = '/api/user/'+uid+'/restaurant';
             return $http.get(url);
         }
 
+
+        //default restaurant list
+        function getRestList(){
+            console.log("-----------------rest list-----------------------------------");
+            var url = '/api/user/'+000+'/restaurant';
+            return $http.get(url);
+        }
 
 
         function removeRestaurant(wid) {

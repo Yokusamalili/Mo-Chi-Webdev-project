@@ -4,7 +4,7 @@
 
 module.exports = function (app, model) {
 
-    app.get('/api/webs/allwebs', allWebs);    //why I change it to api/user/alluser doesn;t work
+    app.get('/api/rest/allwebs', allWebs);
     app.post('/api/user/:userId/restaurant',createRestaurant);
     app.get('/api/user/:userId/restaurant', findRestaurantsForUser);
     app.get('/api/restaurant/:restaurantId', findRestaurantById);

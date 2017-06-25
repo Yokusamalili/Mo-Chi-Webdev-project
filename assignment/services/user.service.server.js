@@ -13,6 +13,53 @@ module.exports = function (app, model) {
 
 
 
+
+    function myGoogleStrategy(token, refreshToken, profile, done){
+        userModel
+            .findUserByGoogleId(profile.id)
+            .then(
+                function(user) {
+                    if(!user) {
+                        var email = profile.emails[0].value;
+                        var emailParts = email.split("@");
+                        var newGoogleUser = {
+                            username:  emailParts[0],
+                            firstName: profile.name.givenName,
+                            lastName:  profile.name.familyName,
+                            google: {
+                                id:    profile.id,
+                                token: token
+                            }
+                        };
+                        userModel.createUser(newGoogleUser)
+                            .then(function (newGoogleUser) {
+
+                                    if (newGoogleUser) {
+
+                                        return done(null, newGoogleUser);
+                                    }
+                                    else {
+                                        return done(null, false, {message: "User not created."})
+                                    }
+                                },
+                                function (err) {
+                                    return done(err);
+                                });
+
+                    } else {
+                        return done(null, user);
+                    }
+                }, function(err) {
+
+                });
+    }
+
+
+
+
+
+
+
     //testing purpose
     function allUsers(req, res) {
         // console.log("------------------getAllUsers----------------------------")

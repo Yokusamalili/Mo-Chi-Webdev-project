@@ -7,12 +7,24 @@
         .config(Config);        //configure the module
     function Config($routeProvider) {
         $routeProvider
-            .when("/", {
-                templateUrl: "views/user/templates/login.view.client.html",
-                controller: "LoginController",
-                controllerAs:"model"
-                // templateUrl: "home.html"
+            // .when("/", {
+            //     templateUrl: "views/user/templates/login.view.client.html",
+            //     controller: "LoginController",
+            //     controllerAs:"model"
+            //     // templateUrl: "home.html"
+            // })
+            .when("/home", {
+                templateUrl: 'views/restaurant/templates/place-search.html',
+                controller: "PlaceSearchController",
+                controllerAs: "model"
             })
+
+            .when("/user/search/restaurants/:sid", {
+                templateUrl: 'views/restaurant/templates/result-home.client.html',
+                controller: "HomeController",
+                controllerAs: "model"
+            })
+
             .when("/login", {
                 templateUrl: "views/user/templates/login.view.client.html",
                 controller: "LoginController",
@@ -48,7 +60,7 @@
             })
 
             .when("/user/:uid/restaurant/:wid", {
-                templateUrl: "views/restaurant/templates/website-edit.view.client.html",
+                templateUrl: "views/restaurant/templates/rest-inline.view.client.html",
                 controller: "RestaurantEditController",
                 controllerAs: "model"
             })

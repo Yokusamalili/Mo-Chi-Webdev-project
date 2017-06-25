@@ -21,5 +21,19 @@
 
         }
         init();
+
+        function createRestaurant(restaurant) {
+            restaurant.uid = vm.userId;
+            RestaurantService
+                .createRestaurant(restaurant)
+                .success(function (restaurant) {
+                    $location.url("/user/"+ vm.userId +"/restaurant");
+
+                })
+                .error(function () {
+
+                })
+        }
+
     }
 })();

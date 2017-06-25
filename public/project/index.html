@@ -4,19 +4,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 
+
     <link href="css/jquery-ui.css" rel="stylesheet"/>
     <script src="../vendor/jquery.js"></script>
     <script src="../vendor/jquery-ui.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+            type="text/javascript"></script>
 
     <script src="app.js"></script>
     <script src="config.js"></script>
     <script src="views/user/controllers/login.controller.client.js"></script>
     <script src="views/user/controllers/profile.controller.client.js"></script>
     <script src="views/restaurant/controllers/website-list.controller.client.js"></script>
-    <script src="views/restaurant/controllers/website-edit.controller.client.js"></script>
+    <script src="views/restaurant/controllers/rest-inline.controller.client.js"></script>
     <script src="views/restaurant/controllers/website-new.controller.client.js"></script>
     <script src="views/detail/controllers/page-list.controller.client.js"></script>
     <script src="views/detail/controllers/page-edit.controller.client.js"></script>
@@ -27,12 +30,15 @@
     <script src="views/user/controllers/register.controller.client.js"></script>
     <script src="directives/jga-directives.js"></script>
     <script src="views/widget/controllers/widget-flickr-search.controller.client.js"></script>
+    <script src="views/restaurant/controllers/place-search.controller.client.js"></script>
+    <script src="views/restaurant/controllers/result-home.controller.client.js"></script>
 
     <script src="services/widget.service.client.js"></script>
     <script src="services/user.service.client.js"></script>
     <script src="services/restaurant.service.client.js"></script>
     <script src="services/detail.service.client.js"></script>
     <script src="services/flickr.service.client.js"></script>
+    <script src="services/place-search.service.client.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
     <link href="css/style.css" rel="stylesheet"/>
