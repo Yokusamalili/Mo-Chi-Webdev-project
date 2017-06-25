@@ -1,4 +1,3 @@
-(function (){ // IIFE
-    angular
-        .module("WebAppMaker", ["ngRoute", "wamDirective", "textAngular"]);
+(function () {
+    angular.module("WebAppMaker", ["ngRoute",'ngMap','ngRateIt']);
 })();

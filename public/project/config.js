@@ -1,119 +1,171 @@
-/**
- * Created by moira on 5/29/17.
- */
-(function() {
-    angular
-        .module("WebAppMaker")
-        .config(Config);        //configure the module
-    function Config($routeProvider) {
-        $routeProvider
-            // .when("/", {
-            //     templateUrl: "views/user/templates/login.view.client.html",
-            //     controller: "LoginController",
-            //     controllerAs:"model"
-            //     // templateUrl: "home.html"
-            // })
-            .when("/home", {
-                templateUrl: 'views/restaurant/templates/place-search.html',
-                controller: "PlaceSearchController",
-                controllerAs: "model"
-            })
+(function () {
+        angular
+            .module("WebAppMaker")
+            .config(configuration);
 
-            .when("/user/search/restaurants/:sid", {
-                templateUrl: 'views/restaurant/templates/result-home.client.html',
-                controller: "HomeController",
-                controllerAs: "model"
-            })
-
-            .when("/login", {
-                templateUrl: "views/user/templates/login.view.client.html",
-                controller: "LoginController",
-                controllerAs:"model"
-            })
-            .when("/register", {
-                templateUrl: "views/user/templates/register.view.client.html",
-                controller:"RegisterController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid", {
-                templateUrl: "views/user/templates/profile.view.client.html",
-                controller:"ProfileController",
-                controllerAs:"model"
-            })
-
-            .when("/user/:uid/database", {
-                templateUrl: "views/user/templates/database.html",
-                controller:"ProfileController",
-                controllerAs:"model"
-            })
-
-
-            .when("/user/:uid/restaurant", {
-                templateUrl: "views/restaurant/templates/website-list.view.client.html",
-                controller: "RestaurantListController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/restaurant/new", {
-                templateUrl: "views/restaurant/templates/website-new.view.client.html",
-                controller: "RestaurantNewController",
-                controllerAs: "model"
-            })
-
-            .when("/user/:uid/restaurant/:wid", {
-                templateUrl: "views/restaurant/templates/rest-inline.view.client.html",
-                controller: "RestaurantEditController",
-                controllerAs: "model"
-            })
-
-
-            .when("/user/:uid/restaurant/:wid/detail", {
-                templateUrl: "views/detail/templates/page-list.view.client.html",
-                controller: "DetailListController",
-                controllerAs: "model"
-            })
-
-
-
-            .when("/user/:uid/restaurant/:wid/detail/new", {
-                templateUrl: "views/detail/templates/page-new.view.client.html",
-                controller: "DetailNewController",
-                controllerAs: "model"
-            })
-
-
-            .when("/user/:uid/restaurant/:wid/detail/:pid", {
-                templateUrl: "views/detail/templates/page-edit.view.client.html",
-                controller: "DetailEditController",
-                controllerAs: "model"
-            })
-
-
-            .when("/user/:uid/restaurant/:wid/detail/:pid/widget", {
-                templateUrl: "views/widget/templates/widget-list.view.client.html",
-                controller: "WidgeListController",
-                controllerAs: "model"
-            })
-
-            .when("/user/:uid/restaurant/:wid/detail/:pid/widget/new", {
-                templateUrl: "views/widget/templates/widget-chooser.view.client.html",
-                controller: "WidgeChooserController",
-                controllerAs: "model"
-            })
-
-            .when("/user/:uid/restaurant/:wid/detail/:pid/widget/:wgid", {
-                templateUrl: "views/widget/templates/widget-edit.view.client.html",
-                controller: "WidgeEditController",
-                controllerAs: "model"
-            })
-
-            .when("/user/:uid/restaurant/:wid/detail/:pid/widget/:wgid/flicker", {
-                templateUrl: 'views/widget/templates/widget-flickr-search.view.client.html',
-                controller:'FlickrController',
-                controllerAs:"model"
-            })
-            .otherwise({
-                    redirectTo:"/login"
+    function checkLoggedIn(UserService, $q, $location) {
+        var deferred = $q.defer();
+        UserService
+            .getLoggedInUser()
+            .then(
+                function (response) {
+                    var currentUser = response;
+                    if(currentUser) {
+                        UserService.setCurrentUser(currentUser);
+                        deferred.resolve();
+                    } else {
+                        deferred.reject();
+                        $location.url("/");
+                    }
+                },
+                function (err) {
+                    console.log(err);
+                    deferred.resolve();
                 }
             );
+
+        return deferred.promise;
     }
-})();
+    function checkAdmin(UserService, $q, $location) {
+        var deferred = $q.defer();
+
+        UserService
+            .getLoggedInUser()
+            .then(function (response) {
+                var user = response.data;
+
+                if (user) {
+                    if (user != null && user.roles == 'admin') {
+                        UserService.setCurrentUser(user);
+                        deferred.resolve();
+                    }
+                    else {
+                        deferred.reject();
+                        $location.url("/");
+                    }
+                }
+                else {
+                    deferred.reject();
+                    $location.url("/");
+                }
+            });
+
+        return deferred.promise;
+    }
+
+    function getLoggedIn(UserService, $q, $location) {
+        var deferred = $q.defer();
+        UserService
+            .getLoggedInUser()
+            .then(
+                function (response) {
+                    var currentUser = response.data;
+                    if(currentUser) {
+                        UserService.setCurrentUser(currentUser);
+                    }
+                    deferred.resolve();
+                },
+                function (err) {
+                    console.log(err);
+                    deferred.resolve();
+                }
+            );
+
+        return deferred.promise;
+    }
+
+        function configuration($routeProvider, $httpProvider) {
+
+
+            $httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+            $httpProvider.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
+
+
+            $routeProvider
+                .when("/login", {
+                    templateUrl: 'views/user/templates/login.view.client.html',
+                    controller: 'loginController',
+                    controllerAs: 'model'
+                })
+                .when("/register", {
+                    templateUrl: 'views/user/templates/register.view.client.html',
+                    controller: 'registerController',
+                    controllerAs: 'model'
+                })
+                .when("/user/profile/reviews/:uid",{
+                    templateUrl: 'views/user/templates/userReviewsPage.html',
+                    controller: "UserController",
+                    controllerAs: "model",
+                    resolve: {
+                        getLoggedIn: getLoggedIn
+                    }
+                })
+                .when("/profile/:uid", {
+                    templateUrl: 'views/user/templates/profile.view.client.html',
+                    controller: 'profileController',
+                    controllerAs: 'model',
+                    resolve: {checkLoggedIn: checkLoggedIn}
+                })
+                .when("/home",{
+                    templateUrl: 'views/restaurant_home/templates/home.html',
+                    controller: "HomeSearchController",
+                    controllerAs: "model",
+                    resolve: {
+                        getLoggedIn: getLoggedIn
+                    }
+
+                })
+                .when("/user/restaurant/:rid/articles",{
+                    templateUrl: 'views/restaurant_home/templates/join-line.html',
+                    controller: "BlogController",
+                    controllerAs: "model",
+                    resolve: {
+                        getLoggedIn: getLoggedIn
+                    }
+                })
+                .when("/user/restaurant/:rid",{
+                    templateUrl: 'views/restaurant_home/templates/infoPage.html',
+                    controller: "ReviewController",
+                    controllerAs: "model",
+                    resolve: {
+                        getLoggedIn: getLoggedIn
+                    }
+                })
+                .when("/user/search/restaurants/:sid",{
+                    templateUrl: 'views/restaurant_home/templates/place-search.client.html',
+                    controller: "HomeController",
+                    controllerAs: "model",
+                    resolve: {
+                        getLoggedIn: getLoggedIn
+                    }
+                })
+                .when("/user/restaurants",{
+                    templateUrl: 'views/restaurant_home/templates/home.html',
+                    controller: "HomeSearchController",
+                    controllerAs: "model",
+                    resolve: {
+                        getLoggedIn: getLoggedIn
+                    }
+                })
+                .when("/user/admin", {
+                    templateUrl: 'views/user/templates/admin.view.client.html',
+                    controller: "AdminController",
+                    controllerAs: "model",
+                    resolve: {
+                        checkAdmin: checkAdmin
+                    }
+                })
+                .when("/", {
+                    templateUrl: 'views/restaurant_home/templates/home.html',
+                    controller: "HomeSearchController",
+                    controllerAs: "model",
+                    resolve: {
+                        getLoggedIn: getLoggedIn
+                    }
+                })
+                .otherwise({
+                    redirectTo: "/"
+                });
+        }
+
+    })();

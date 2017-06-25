@@ -1,0 +1,45 @@
+<div ng-include src="'views/user/templates/navbar.view.client.html'"></div>
+<div class="page-background">
+    <section id="contact class" class="container-fluid text-center">
+        <div class="container-fluid">
+            <div class="row">
+                <div>
+                    <div class="input-group ">
+                        <input style="height: 45px;" type="text" ng-model="model.search" class="form-control" placeholder="Keyword">
+                        <div class="input-group-btn">
+                            <a href="#/user/search/restaurants/{{model.search}}" type="submit"
+                               class="btn btn-success cust-btn btn-lg">Search
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="container-fluid">
+        <h2> Results</h2>
+
+        <div class="row">
+            <div class="col-sm-6 col-md-3" ng-repeat="restaurant in model.restaurants">
+                <div class="thumbnail">
+                    <img class="my-image" src="{{restaurant.image_url}}" alt="">
+                    <div class="caption">
+                        <h3>{{restaurant.name | limitTo:20}}{{restaurant.name.length > 20 ? "..." : ""}}</h3>
+                        <p><b class="wb-red ">Address: </b>{{restaurant.address |
+                            limitTo:15}}{{restaurant.address.length > 15 ? "..." : ""}}</p>
+                        <p><b class="wb-red ">Waiting Time: </b> 15-20 minutes</p>
+                        <p>
+                            <a href="#/user/restaurant/{{restaurant.id}}/articles" class="btn btn-primary"
+                               role="button">Join the Line</a>
+                            <a href="#/user/restaurant/{{restaurant.id}}" class="btn btn-default" role="button">More Info</a>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

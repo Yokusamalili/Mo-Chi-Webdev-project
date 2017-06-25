@@ -1,42 +1,40 @@
-/**
- * Created by moira on 5/28/17.
- */
-
-(function () {
+(function(){
     angular
         .module("WebAppMaker")
-        .controller("RegisterController", RegisterController);
+        .controller("registerController", registerController);
 
-    function RegisterController($location, UserService) {
+    function registerController($routeParams, UserService,  $location, $rootScope) {
         var vm = this;
-        vm.createUser = createUser;
+        vm.create = create;
 
-        function createUser(user) {
-            if(user.password !== user.password2 || !user.password || !user.password2) {
-                vm.error = "Your passwords don't match";
-                return;
-            }
-
-            var promise = UserService.findUserByUsername(user.username);
-            promise
-                .success(function(newuser){
-                    if(newuser !== '0') {
-                        vm.error = "Username exits, please change another one";
-                    }
-                    else {
-                    UserService
-                        .createUser(user)
-                        .success(function (user) {
-                            $location.url("/user/" + user._id);
-
-                        })
-                        .error(function () {
-
-                        })
-                    }
-                });
-
-
+        function init() {
         }
+        init();
+
+        function create(user) {
+            if (vm.password2 !== user.password) {
+                vm.error = "Passwords entered do not match";
+            }
+            else {
+                UserService.findUserByUsername(user.username)
+                    .then(function (response) {
+                        if (response) {
+                            vm.error = "Username is taken!!."
+                        }
+                        else {
+                            UserService.createUser(user)
+                                .then(function (response) {
+                                    var user = response;
+                                    $rootScope.currentUser = user;
+                                    $location.url("/user/" + user._id);
+                                })
+                                .catch(function (error) {
+                                    vm.error = "Unable to register user due to an error: " + error;
+                                });
+                        }
+                    });
+            }
+        }
+
     }
 })();

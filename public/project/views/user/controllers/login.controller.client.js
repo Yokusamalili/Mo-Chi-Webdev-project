@@ -1,32 +1,35 @@
-/**
- * Created by moira on 5/28/17.
- */
 (function () {
     angular
         .module("WebAppMaker")
-        .controller("LoginController", LoginController);
-    
-    function LoginController($location, UserService) {
+        .controller("loginController", loginController);
+
+    function loginController(UserService, $location, $rootScope) {
         var vm = this;
         vm.login = login;
 
-        function login (username,password) {
-           UserService
-               .findUserByCredentials(username, password)
-               .success(function (user) {
-                    if(user === '0')
-                    {
-                        vm.error = "User Not Found";
-                    }
-                    else {
-                        $location.url("/user/" + user._id);
-                    }
-                })
-                .error(function (user) {
-                    console.log("error from login");
-                });
 
+        function init() {
+        }
 
+        init();
+
+        function login(user) {
+            UserService
+                .login(user)
+                .then(
+                    function (response) {
+                        if (response) {
+                            if(response.data == "true") {
+                                vm.error = "User not found";
+                            } else {
+                                var user = response.data;
+                                $rootScope.currentUser = user;
+                                $location.url("/home");
+                            }
+                        } else {
+                            vm.error = "User not found";
+                        }
+                    });
         }
     }
 })();

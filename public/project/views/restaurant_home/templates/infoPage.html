@@ -1,0 +1,19 @@
+<div ng-include src="'views/user/templates/navbar.view.client.html'"></div>
+
+    <div class="container">
+        <div class="row">
+                <div class="thumbnail">
+                    <ng-map center="[{{model.restaurant.lat}}, {{model.restaurant.lng}}]">
+                        <marker position="{{model.restaurant.lat}}, {{model.restaurant.lng}}"
+                                title="Hello World!"></marker>
+                    </ng-map>
+                    <div class="caption">
+                        <h3>{{model.restaurant.name}}</h3>
+                        <p><b class="wb-red ">Address: </b> {{model.restaurant.address}}</p>
+                        <p><b class="wb-red ">Phone Number: </b> {{model.restaurant.phone}}</p>
+                        <p><a href="#/user/restaurant/{{model.restaurantId}}/articles" class="btn btn-primary"
+                              role="button">Join the Line</a></p>
+                    </div>
+            </div>
+        </div>
+

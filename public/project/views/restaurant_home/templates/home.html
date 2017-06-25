@@ -1,0 +1,53 @@
+<style>
+    h1 {
+        text-align: center;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-weight: bold
+    }
+
+    .cust {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+    }
+
+    .pad {
+        padding: 12% 25% 25% 25%;
+        position: absolute;
+        height: 50px;
+    }
+
+</style>
+
+<div class="hero-text">
+    <h1>Waitless</h1>
+</div>
+
+<div class="collapse navbar-collapse" id="navbar-brand-centered">
+    <ul class="nav navbar-nav navbar-right" style="font-weight: bold">
+        <!--<li ng-show="currentUser && currentUser.roles == 'admin'""><a href="">Admin</a></li>-->
+        <li ng-show="currentUser.roles == 'admin'" role="presentation"><a class="white" href="#/user/admin">Admin</a></li>
+        <li ng-show="!currentUser" role="presentation"><a class="white" href="#/register">Register</a></li>
+        <li ng-show="!currentUser" role="presentation"><a class="white" href="#/login">Login</a></li>
+        <li ng-show="currentUser" role="presentation">
+            <a href="#/user/profile/reviews/{{currentUser._id}}" class="white"> {{currentUser.username}}</a></li>
+        <li ng-show="currentUser" role="presentation">
+            <a href="" ng-click="navBarControllerModel.logout()" class="white"> Logout</a></li>
+    </ul>
+</div>
+
+<form>
+    <div class="input-group pad">
+        <input type="text" ng-model="rest.name" class="form-control"
+               placeholder="What for food today...">
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="submit" ng-click="model.getRestaurantsByNameAndCity(rest)">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </div>
+    </div>
+</form>

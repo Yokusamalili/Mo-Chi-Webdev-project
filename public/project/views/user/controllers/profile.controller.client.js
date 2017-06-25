@@ -1,55 +1,56 @@
-/**
- * Created by moira on 5/28/17.
- */
 (function () {
-    angular
-        .module("WebAppMaker")
-        .controller("ProfileController", ProfileController);
-    function ProfileController($routeParams, UserService) {
-        var vm = this;
-        var userId = $routeParams.uid;
-        vm.updateUser = updateUser;
-        vm.deleteUser = deleteUser;
+        angular
+            .module("WebAppMaker")
+            .controller("profileController", profileController);
 
+        function profileController($routeParams, UserService, $location, $rootScope) {
+            var vm = this;
+            var userId = $routeParams['uid'];
+            vm.deleteU = deleteU;
+            vm.Update = Update;
+            vm.logout = logout;
 
-        function init() {
-            UserService.findUserById(userId)
-                .then(function (response) {
-                    console.log(response);
-                    console.log(response.data);
-                    vm.user=response.data;
-                })
+            function init() {
+                UserService.findUserById(userId)
+                    .then(function (user) {
+                        vm.user = user;
+                    });
+                vm.updateProfilePicture = "/api/project/user/" + userId;
+            }
 
-            //return all users for the database page
-            UserService.allUsers()
-                .success(function (newusers) {
-                    if(newusers != '[]') {
-                        vm.users = newusers;
-                    }
-                })
-                .error(function () {
-
-                });
-
-
-        }
-        init();
-
-
-
-
-        function deleteUser(currentUserId) {
-            console.log(currentUserId);
-            UserService.deleteUser(currentUserId);
             init();
+
+            function logout() {
+                UserService
+                    .logout()
+                    .then(
+                        function (response) {
+                            $rootScope.currentUser = null;
+                            $location.url("/");
+                        });
+            }
+
+            function Update(newUser) {
+                UserService
+                    .updateUser(userId, newUser)
+                    .then(function (user) {
+                        if (user) {
+                            vm.message = "Profile successfully updated";
+                        } else {
+                            vm.error = "Unable to update Profile";
+                        }
+                    });
+            };
+
+            function deleteU() {
+                UserService.deleteUser(userId)
+                    .then(function (user) {
+                        if (user) {
+                            $location.url("/login");
+                        } else {
+                            vm.error = "Unable to delete User";
+                        }
+                    });
+            };
         }
-
-
-        function updateUser() {
-            UserService.updateUser(vm.user);
-
-        }
-
-
-    }
-})();
+    })();

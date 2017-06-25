@@ -1,66 +1,139 @@
-/**
- * Created by moira on 6/9/17.
- */
-(function () {
+(function(){
     angular
         .module("WebAppMaker")
-        .factory("UserService", UserService);
-    
-    function UserService($http) {
+        .factory('UserService', userService);
+
+    function userService($http, $rootScope) {
 
         var api = {
-            findUserByCredentials: findUserByCredentials,
-            findUserById: findUserById,
-            createUser:createUser,
-            findUserByUsername:findUserByUsername,
-            allUsers:allUsers,
-            updateUser:updateUser,
-            deleteUser:deleteUser,
-
+            "login": login,
+            "logout": logout,
+            "updateUser": updateUser,
+            "findUserByCredentials": findUserByCredentials,
+            "findUserById": findUserById,
+            "createUser": createUser,
+            "findUserByUsername": findUserByUsername,
+            "deleteUser": deleteUser,
+            "findUserByFirstName":findUserByFirstName,
+            "followUser": followUser,
+            "unFollowUser": unFollowUser,
+            "isFollowingAlready": isFollowingAlready,
+            "getLoggedInUser": getLoggedInUser,
+            "setCurrentUser": setCurrentUser,
+            "createAdminUser": createAdminUser,
+            "updateAdminUser": updateAdminUser,
+            "deleteAdminUser": deleteAdminUser,
+            "findAllUsersAdmin": findAllUsersAdmin,
+            "getAllFollowers": getAllFollowers,
+            "getAllFollowing":getAllFollowing
         };
         return api;
 
-        function allUsers() {
-            var url = '/api/users/alluser';
-            return $http.get(url);
+        function followUser(userId, loggedInUserId) {
+            return  $http.put("/api/project/user/" + loggedInUserId + "/following/" + userId);
+
+        }
+
+        function getAllFollowers(userId) {
+            return $http.get("/api/project/followers/user/"+userId);
+        }
+
+        function getAllFollowing(userId) {
+            return $http.get("/api/project/following/user/"+userId);
+        }
+
+        function unFollowUser(userId, loggedInUserId) {
+            return  $http.put("/api/project/user/" + loggedInUserId + "/unfollows/" + userId);
+
+        }
+
+        function isFollowingAlready(userId, loggedInUserId) {
+            return  $http.get("/api/project/user/" + loggedInUserId + "/isFollowingAlready/" + userId);
+
+        }
+
+        function logout() {
+            return $http.post("/api/project/logout");
+        }
+        function login(user) {
+            return $http.post("/api/project/login", user);
         }
 
         function findUserByUsername(username) {
-            var url = '/api/user?username='+username;
-            return $http.get(url);
+            return $http.get("/api/project/user?username="+username)
+                .then(function (res) {
+                    return res.data;
+                });
+        }
+
+        function updateUser(userId, newUser) {
+            return $http.put("/api/project/user/"+userId, newUser)
+                .then(function (res) {
+                    return res.data;
+                });
+        }
+
+        function findUserById(userId) {
+            return $http.get("/api/project/user/"+userId)
+                .then(function (res) {
+                    return res.data;
+                });
+        }
+
+        function findUserByCredentials(username, password) {
+            return $http.get("/api/project/user?username="+username+"&password="+password)
+                .then(function (res) {
+                    return res.data;
+                });
         }
 
         function createUser(user) {
-            var newuser = {
-                username:user.username,
-                password:user.password,
-                password2:user.password2
-            }
-            return $http.post('/api/user', newuser);
-            //users.push(user);
+            return $http.post("/api/project/user", user)
+                .then(function (res) {
+                    return res.data;
+                });
         }
 
-
-        function findUserById(userId) {
-            var url = '/api/user/'+userId;
-            return $http.get(url);
+        function deleteUser(userId) {
+            return $http.delete("/api/project/user/"+userId)
+                .then(function (res) {
+                    return res.data;
+                });
         }
 
-
-        function findUserByCredentials(username, password) {
-            var url = '/api/user?username='+username+'&password='+password;
-            return $http.get(url);
+        function findUserByFirstName(firstName) {
+            return $http.get("/api/project/user/firstName/"+firstName)
+                .then(function (res) {
+                    return res.data;
+                });
         }
 
+        // function getUser() {
+        //     return $http.get("/api/project/loggedin");
+        // }
 
-        function deleteUser(uid) {
-            var url ="/api/user/" + uid;
-            $http.delete(url);
+        function getLoggedInUser() {
+            return $http.get("/api/project/loggedin");
         }
 
-        function updateUser(user) {
-            var url ="/api/user/" + user._id;
-            $http.put(url, user);
+        function setCurrentUser(user) {
+            $rootScope.currentUser = user;
+        }
+
+        function createAdminUser(user) {
+            return $http.post('/api/project/admin/user', user);
+        }
+
+        function updateAdminUser(userId, user) {
+            return $http.put('/api/project/admin/user/' + userId, user);
+        }
+
+        function deleteAdminUser(userId) {
+            return $http.delete('/api/project/admin/user/' + userId);
+        }
+
+        function findAllUsersAdmin() {
+            return $http.get("/api/project/admin/user");
         }
 
     }

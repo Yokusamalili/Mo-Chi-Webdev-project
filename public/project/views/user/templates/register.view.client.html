@@ -1,17 +1,79 @@
- <div class="container-fluid">
-     <div ng-show="model.error" class="alert alert-danger" role="alert"> {{model.error}}</div>
+<a href="#/home"> <h1 class="cust">Waitless</h1></a>
+<div class="container-fluid">
+    <h1>Register</h1>
 
-     <h1>Register</h1>
-        <input ng-model="user.username" type="text"
-               class="form-control"
-               placeholder="username"/>
-        <input ng-model="user.password" type="password"
-               class="form-control"
-               placeholder="password"/>
-        <input ng-model="user.password2" type="password"
-               class="form-control"
-               placeholder="verify password"/>
-        <a ng-click="model.createUser(user)" class="btn btn-primary btn-block">Register</a>
-        <a class="btn btn-danger  btn-block"
-           href="#/login">Cancel</a>
+    <div class="alert alert-success" ng-show="model.message">
+        {{model.message}}
     </div>
+
+    <div class="alert alert-danger" ng-show="model.error">
+        {{model.error}}
+    </div>
+
+
+    <form name="registrationForm" ng-submit="model.create(model.user)" novalidate>
+
+        <div class="form-group" >
+            <input class="form-control" ng-model="model.user.username"
+                   id="username"
+                   name="uname"
+                   placeholder="username" type="text" required/>
+            <p ng-show="registrationForm.uname.$invalid && !registrationForm.uname.$pristine"
+               class="help-block">Please provide a User Name.</p>
+        </div>
+
+        <div class="form-group">
+        <input ng-model="model.user.password"
+               id="password"
+               name="pass1"
+               class="form-control"
+               type="password"
+               placeholder="password" required/>
+            <p ng-show="registrationForm.pass1.$invalid && !registrationForm.pass1.$pristine"
+               class="help-block">Please provide a password.</p>
+        </div>
+
+        <div class="form-group">
+        <input id="password2"
+               ng-model="model.password2"
+               name="pass2"
+               class="form-control"
+               type="password"
+               placeholder="verify password" required/>
+            <p ng-show="registrationForm.pass2.$invalid && !registrationForm.pass2.$pristine"
+               class="help-block">Password dont match.</p>
+        </div>
+
+
+
+                <!--<div class="form-group">-->
+                    <!--<label class="radio-inline">-->
+                        <!--<input ng-model="model.user.roles"-->
+                               <!--name="roles"-->
+                               <!--type="radio"-->
+                               <!--value="critic" />Critic-->
+                    <!--</label>-->
+
+                    <!--<label class="radio-inline">-->
+                    <!--<input ng-model="model.user.roles"-->
+                           <!--name="roles"-->
+                           <!--type="radio"-->
+                           <!--value="user"/>User-->
+                    <!--</label>-->
+
+
+                <!--</div>-->
+
+        <div class="row">
+            <div class="col-sm-3 col-sm-offset-3">
+                <button type="submit" class="btn btn-primary btn-block" ng-disabled="registrationForm.$invalid">
+                    Register
+                </button>
+            </div>
+            <div class="col-sm-3">
+                <a class="btn btn-danger btn-block"
+                   href="#/home">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
