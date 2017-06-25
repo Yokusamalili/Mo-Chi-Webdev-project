@@ -115,14 +115,7 @@
                     }
 
                 })
-                .when("/user/restaurant/:rid/articles",{
-                    templateUrl: 'views/restaurants/templates/join-line.html',
-                    controller: "BlogController",
-                    controllerAs: "model",
-                    resolve: {
-                        getLoggedIn: getLoggedIn
-                    }
-                })
+
                 .when("/user/restaurant/:rid",{
                     templateUrl: 'views/restaurants/templates/infoPage.html',
                     controller: "ReviewController",

@@ -9,6 +9,7 @@
             vm.deleteU = deleteU;
             vm.Update = Update;
             vm.logout = logout;
+            vm.userId = userId;
 
             function init() {
                 UserService.findUserById(userId)
