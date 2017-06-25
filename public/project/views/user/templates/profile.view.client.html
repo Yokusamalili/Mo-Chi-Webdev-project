@@ -1,5 +1,7 @@
 <div ng-include src="'views/user/templates/navbar.view.client.html'"></div>
-
+<form name="profileEditForm" action="{{model.updateProfilePicture}}" method="post"
+      enctype="multipart/form-data"
+      novalidate>
 <table class="pro-cust">
     <tr>
         <td style="width: 40%">
@@ -11,6 +13,7 @@
                          ng-show="model.user.imgUrl" ng-src="{{model.user.imgUrl}}">
                     <input id="upload" type="file" class="form-control"
                            name="profileImg" style="width: 270%">
+
                     <div class="alert alert-danger" ng-show="model.error">
                         {{model.error}}
                     </div>
@@ -23,9 +26,7 @@
         </td>
 
         <td style="width: 90%; margin-right: 20%">
-            <form name="profileEditForm" action="{{model.updateProfilePicture}}" method="post"
-                  enctype="multipart/form-data"
-                  novalidate>
+
                 <div class="form-group">
                     <label>Username</label>
                     <input value="{{model.user.username}}" type="text" name="username" class="form-control"
@@ -67,7 +68,7 @@
                             class="btn btn-success btn-block" ng-disabled="profileEditForm.$invalid">Update
                     </button>
                 </div>
-            </form>
+
 
             <a ng-click="model.deleteU()"
                class="btn btn-danger btn-block">
@@ -83,3 +84,4 @@
     </div>
 
 </table>
+</form>
