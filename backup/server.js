@@ -20,7 +20,7 @@ app.use(express.static(__dirname + '/public'));
 
 //require ("./test/app.vendor")(app);
 //load the app.vendor
-require ("./project/app.js")(app);
+require ("./assignment/app.js")(app);
 
 
 var ipaddress = process.env.PORT;

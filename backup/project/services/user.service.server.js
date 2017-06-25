@@ -23,11 +23,11 @@ module.exports = function (app, model) {
     var reviewModel = model.reviewModel;
     var LocalStrategy = require('passport-local').Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
-    var GoogleStrategy = require('passport-oauth2').OAuth2Strategy;
+    var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     var bcrypt = require("bcrypt-nodejs");
     passport.use('project', new LocalStrategy(projectLocalStrategy));
-    // passport.use('Google', new GoogleStrategy(GoogleConfig,myGoogleStrategy));
-    // passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+    passport.use('Google',new GoogleStrategy(GoogleConfig,myGoogleStrategy))
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 

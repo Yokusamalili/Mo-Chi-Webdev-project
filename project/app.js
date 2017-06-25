@@ -1,17 +1,18 @@
 module.exports = function (app) {
     //
-    // var connectionString = 'mongodb://localhost/chi-mo-webdev';
-    // connectionString = 'mongodb://yokusamalili:cinderella99@ds143141.mlab.com:43141/heroku_ld867kn4';
-    // if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
-    //     var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
-    //     var password = process.env.MLAB_PASSWORD_WEBDEV;
-    //     connectionString = 'mongodb://' + username + ':' + password;
-    //     connectionString += '@ds143141.mlab.com:43141/heroku_ld867kn4'; // user yours
-    // }
+    var connectionString = 'mongodb://localhost/chi-mo-webdev';
+    connectionString = 'mongodb://yokusamalili:cinderella99@ds143141.mlab.com:43141/heroku_ld867kn4';
+    if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
+        var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
+        var password = process.env.MLAB_PASSWORD_WEBDEV;
+        connectionString = 'mongodb://' + username + ':' + password;
+        connectionString += '@ds143141.mlab.com:43141/heroku_ld867kn4'; // user yours
+    }
     // var mongoose = require('mongoose');
     // mongoose.connect(connectionString);
 
     var mongoose = require("mongoose");
+    mongoose.connect(connectionString);
     var q = require('q');
     mongoose.Promise = q.Promise;
 

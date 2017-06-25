@@ -1,0 +1,40 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <p class="navbar-text pull-right">
+            <a class="navbar-link" href="#/user/{{model.userId}}/restaurant/{{model.restaurantId}}/detail/new">
+                <span class="glyphicon glyphicon-plus"></span>
+            </a>
+        </p>
+        <p class="navbar-text pull-left">
+            <a class="navbar-link" href="#/user/{{model.userId}}/restaurant">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+        </p>
+        <div class="navbar-header">
+            <a class="navbar-brand">Details</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid contentPadding">
+    <ul class="list-group">
+        <li ng-repeat= "detail in model.details" class="list-group-item">
+            <a href="#/user/{{model.userId}}/restaurant/{{model.restaurantId}}/detail/{{detail._id}}/widget">{{detail.name}}</a>
+            <div class="listConf pull-right">
+                <a href="#/user/{{model.userId}}/restaurant/{{model.restaurantId}}/detail/{{detail._id}}">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<footer class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a class="navbar-link" href="#/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</footer>
