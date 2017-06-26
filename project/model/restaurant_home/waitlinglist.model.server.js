@@ -1,8 +1,8 @@
 module.exports = function () {
     var q = require('q');
     var mongoose = require ('mongoose');
-    var BlogSchema = require('./blog.schema.server.js')();
-    var BlogModel = mongoose.model('MongooseBlogProject', BlogSchema);
+    var waitingSchema = require('./waitinglist.schema.server.js')();
+    var BlogModel = mongoose.model('MongooseBlogProject', waitingSchema);
     var userModel = null;
 
     var api = {

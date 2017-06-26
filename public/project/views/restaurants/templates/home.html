@@ -30,13 +30,11 @@
 <div class="collapse navbar-collapse" id="navbar-brand-centered">
     <ul class="nav navbar-nav navbar-right" style="font-weight: bold">
         <!--<li ng-show="currentUser && currentUser.roles == 'admin'""><a href="">Admin</a></li>-->
-        <li ng-show="currentUser.roles == 'admin'" role="presentation"><a class="white" href="#/user/admin">Admin</a></li>
+        <li ng-show="currentUser.roles == 'admin'" role="presentation"><a class="white" href="#/user/admin">Manage Users</a></li>
         <li ng-show="!currentUser" role="presentation"><a class="white" href="#/register">Register</a></li>
         <li ng-show="!currentUser" role="presentation"><a class="white" href="#/login">Login</a></li>
         <li ng-show="currentUser" role="presentation">
-            <a href="#/user/profile/reviews/{{currentUser._id}}" class="white"> {{currentUser.username}}</a></li>
-        <li ng-show="currentUser" role="presentation">
-            <a href="" ng-click="navBarControllerModel.logout()" class="white"> Logout</a></li>
+            <a href="#/user/profile/reviews/{{currentUser._id}}" class="white">Welcome, {{currentUser.username}} </a></li>
     </ul>
 </div>
 

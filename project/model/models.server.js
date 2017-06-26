@@ -1,7 +1,7 @@
 module.exports = function () {
     var userModel = require("../model/user/user.model.server.js")();
     var reviewModel = require("../model/restaurant_home/review.model.server.js")();
-    var blogModel = require("../model/restaurant_home/blog.model.server")();
+    var blogModel = require("./restaurant_home/waitlinglist.model.server")();
 
     var model = {
         userModel: userModel,

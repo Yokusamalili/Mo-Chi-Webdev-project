@@ -1,7 +1,16 @@
+<style>
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    tr:nth-child(odd) {
+        background-color: white;
+    }
+</style>
 <div ng-include src="'views/user/templates/navbar.view.client.html'"></div>
 <div class="container">
     <div class="table-responsive">
-        <table class="table table-bordered" id="table" >
+        <table class="table " id="table"  >
             <thead>
             <tr>
                 <th>UserName</th>

@@ -190,6 +190,11 @@ div.user-menu-container .thumbnail {
     color:white;
 }
 
+ .t-cust {
+     font-family: arial, sans-serif;
+     border-collapse: collapse;
+     width: 100%;
+ }
 
 
 
